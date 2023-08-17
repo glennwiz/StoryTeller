@@ -1,3 +1,30 @@
 {
-
+  "MagicalItems": [
+    "Crystal Ball",
+    "Enchanted Sword",
+    "Phoenix Feather",
+    "Cloak of Invisibility",
+    "Ring of Power"
+  ],
+  "EverydayItems": [
+    "Book",
+    "Lamp",
+    "Chair",
+    "Pen",
+    "Glasses"
+  ],
+  "Weapons": [
+    "Bow and Arrow",
+    "Dagger",
+    "Shield",
+    "Whip",
+    "Axe"
+  ],
+  "Artifacts": [
+    "Ancient Scroll",
+    "Lost Diary",
+    "Golden Idol",
+    "Mysterious Locket",
+    "Sacred Relic"
+  ]
 }
