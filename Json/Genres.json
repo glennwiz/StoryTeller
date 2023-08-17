@@ -1,0 +1,29 @@
+{
+  "Genres": {
+    "Fantasy": {
+      "Elements": [ "Magic", "Dragons", "Quests", "Kingdoms" ],
+      "CommonSettings": [ "Medieval towns", "Enchanted forests", "Mage towers" ],
+      "KeyCharacters": [ "Wizards", "Elves", "Dwarves", "Orcs" ]
+    },
+    "SciFi": {
+      "Elements": [ "Space travel", "Aliens", "Advanced technology", "Dystopia" ],
+      "CommonSettings": [ "Space stations", "Alien planets", "Futuristic cities" ],
+      "KeyCharacters": [ "Astronauts", "Alien beings", "Robots", "Scientists" ]
+    },
+    "Mystery": {
+      "Elements": [ "Whodunits", "Detective work", "Clues", "Suspects" ],
+      "CommonSettings": [ "Mansions", "Crime scenes", "Police stations" ],
+      "KeyCharacters": [ "Detectives", "Victims", "Criminals", "Witnesses" ]
+    },
+    "Romance": {
+      "Elements": [ "Love triangles", "Forbidden love", "Passion", "Heartbreak" ],
+      "CommonSettings": [ "Cafes", "Beaches", "Historical settings" ],
+      "KeyCharacters": [ "Lovers", "Rivals", "Friends", "Family" ]
+    },
+    "Horror": {
+      "Elements": [ "Ghosts", "Monsters", "Psychological thrills", "Curses" ],
+      "CommonSettings": [ "Haunted houses", "Graveyards", "Isolated cabins" ],
+      "KeyCharacters": [ "Victims", "Monsters", "Survivors", "Ghosts" ]
+    }
+  }
+}

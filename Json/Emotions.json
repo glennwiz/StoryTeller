@@ -1,0 +1,38 @@
+{
+  "PositiveEmotions": [
+    "happiness",
+    "joy",
+    "love",
+    "excitement",
+    "gratitude",
+    "pride",
+    "amusement",
+    "relief",
+    "contentment",
+    "admiration"
+  ],
+  "NegativeEmotions": [
+    "anger",
+    "sadness",
+    "fear",
+    "jealousy",
+    "disgust",
+    "shame",
+    "envy",
+    "frustration",
+    "guilt",
+    "loneliness"
+  ],
+  "NeutralEmotions": [
+    "curiosity",
+    "confusion",
+    "anticipation",
+    "surprise",
+    "indifference",
+    "boredom",
+    "doubt",
+    "contemplation",
+    "uncertainty",
+    "reflection"
+  ]
+}

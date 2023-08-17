@@ -1,0 +1,27 @@
+{
+  "Settings": {
+    "UrbanLocations": {
+      "Cities": [ "New York", "London", "Tokyo", "Paris", "Mumbai" ],
+      "Towns": [ "Springfield", "Shelbyville", "Mayberry", "Hawkins", "Derry" ]
+    },
+    "RuralLocations": {
+      "Villages": [ "Hobbiton", "Laketown", "Esgaroth", "Bree" ],
+      "Farms": [ "Kent Farm", "McGregor's Farm", "Ponderosa" ],
+      "Forests": [ "Sherwood Forest", "Fangorn Forest", "The Forbidden Forest" ]
+    },
+    "IndoorSettings": {
+      "Houses": [ "Bates Motel", "The Burrow", "Bag End" ],
+      "Castles": [ "Hogwarts", "Winterfell", "Camelot" ],
+      "Inns": [ "The Prancing Pony", "The Leaky Cauldron", "Inn of the Last Home" ]
+    },
+    "NaturalLandmarks": {
+      "Mountains": [ "Mount Doom", "The Lonely Mountain", "Mount Everest" ],
+      "Rivers": [ "The Nile", "The Amazon", "The Mississippi" ],
+      "Lakes": [ "Lake Tahoe", "Loch Ness", "Lake Baikal" ]
+    },
+    "FantasyRealms": {
+      "MagicalLands": [ "Narnia", "Middle-Earth", "Westeros" ],
+      "OtherDimensions": [ "The Upside Down", "The Shadow Realm", "The Astral Plane" ]
+    }
+  }
+}

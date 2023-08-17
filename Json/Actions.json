@@ -1,0 +1,71 @@
+{
+  "CombatMoves": [
+    "punch",
+    "kick",
+    "slash",
+    "block",
+    "dodge",
+    "parry",
+    "shoot",
+    "stab"
+  ],
+  "TravelMethods": [
+    "walk",
+    "run",
+    "fly",
+    "teleport",
+    "sail",
+    "drive",
+    "ride"
+  ],
+  "Interactions": [
+    "talk",
+    "hug",
+    "argue",
+    "whisper",
+    "shout",
+    "laugh",
+    "cry",
+    "gesture"
+  ],
+  "PhysicalActions": [
+    "jump",
+    "climb",
+    "crawl",
+    "dance",
+    "fall",
+    "lift",
+    "throw",
+    "catch"
+  ],
+  "MentalActions": [
+    "think",
+    "dream",
+    "ponder",
+    "forget",
+    "remember",
+    "focus",
+    "distract",
+    "wonder"
+  ],
+  "EmotionalActions": [
+    "smile",
+    "frown",
+    "scream",
+    "tremble",
+    "rejoice",
+    "mourn",
+    "desire",
+    "fear"
+  ],
+  "DailyActivities": [
+    "eat",
+    "drink",
+    "sleep",
+    "read",
+    "write",
+    "cook",
+    "clean",
+    "work"
+  ]
+}

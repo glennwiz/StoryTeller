@@ -1,0 +1,40 @@
+{
+  "WeatherConditions": {
+    "SunnyDays": {
+      "description": "Clear skies, warm weather.",
+      "conditions": [
+        "clear sky",
+        "partly cloudy",
+        "sunny",
+        "warm"
+      ]
+    },
+    "RainyDays": {
+      "description": "Rain, thunderstorms.",
+      "conditions": [
+        "light rain",
+        "heavy rain",
+        "thunderstorm",
+        "drizzle"
+      ]
+    },
+    "SnowyDays": {
+      "description": "Snow, blizzards.",
+      "conditions": [
+        "light snow",
+        "heavy snow",
+        "blizzard",
+        "sleet"
+      ]
+    },
+    "WindyDays": {
+      "description": "Breezy to stormy conditions.",
+      "conditions": [
+        "light breeze",
+        "strong wind",
+        "gale",
+        "hurricane"
+      ]
+    }
+  }
+}
