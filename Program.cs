@@ -41,7 +41,7 @@ Console.Write(prompt);
 // run the inference in a loop to chat with LLM
 while (prompt != "stop")
 {
-    foreach (var text in session.Chat(prompt, new InferenceParams() { Temperature = 1.1f, AntiPrompts = new List<string> { "\r\n" } }))
+    foreach (var text in session.Chat(prompt, new InferenceParams() { Temperature = 0.6f, AntiPrompts = new List<string> { "\r\n" } }))
     {
         Console.Write(text);
     }
