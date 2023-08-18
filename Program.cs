@@ -2,17 +2,14 @@
 using LLama;
 using LLama.Common;
 
-string primer = "default";
-Mode mode = Mode.Exit;
+var primer = "default";
+var mode = Mode.Exit;
 
-int choice = 0;
+var choice = 0;
 
-Console.WriteLine("\nPlease select an option:");
-Console.WriteLine("1. ChatBot");
-Console.WriteLine("2. Never-ending Story Teller");
-Console.WriteLine("3. Exit");
+WriteTheSelection();
 
-bool result = Int32.TryParse(Console.ReadLine(), out choice);
+var result = int.TryParse(Console.ReadLine(), out choice);
 
 if (!result)
 {
@@ -47,6 +44,10 @@ else{
             }
             break;
         case 3:
+            Console.WriteLine("You chose DiscordBot.");
+            mode = Mode.DiscordBot;
+            break;
+        case 4:
             Console.WriteLine("Exiting...");
             mode = Mode.Exit;
             break;
@@ -67,31 +68,17 @@ Console.WriteLine();
 //Write the primer
 Console.Write(prompt);
 
-if(mode == Mode.StoryTeller){
-    while (prompt != "stop")
-    {
-        foreach (var text in session.Chat(prompt,
-                     new InferenceParams() { Temperature = 0.6f, AntiPrompts = new List<string> { "\r\n" } }))
-        {
-            Console.Write(text);
-        }
-
-        prompt = ".";
-    }
+if(mode == Mode.StoryTeller)
+{
+    StoryTeller(prompt, session);
 }
-else if(mode == Mode.ChatBot){
-    while (true)
-    {
-        foreach (var text in session.Chat(prompt, new InferenceParams() { Temperature = 0.6f, AntiPrompts = new List<string> { "Developer1:" } }))
-        {
-            Console.Write(text);
-        }
-
-        Console.ForegroundColor = ConsoleColor.Green;
-        prompt = Console.ReadLine();
-        Console.ForegroundColor = ConsoleColor.White;
-
-    }
+else if(mode == Mode.ChatBot)
+{
+    ChatBot(session, prompt);
+}
+else if(mode == Mode.DiscordBot)
+{
+    DiscordBot(session, prompt);
 }
 
 // save the oki 
@@ -125,9 +112,46 @@ static string GetPrimer()
     return generatedText;
 }
 
-enum Mode
+void StoryTeller(string s, ChatSession chatSession)
 {
-    ChatBot,
-    StoryTeller,
-    Exit
+    while (s != "stop")
+    {
+        foreach (var text in chatSession.Chat(s,
+                     new InferenceParams() { Temperature = 0.6f, AntiPrompts = new List<string> { "\r\n" } }))
+        {
+            Console.Write(text);
+        }
+
+        s = ".";
+    }
+}
+
+void ChatBot(ChatSession session1, string prompt1)
+{
+    while (true)
+    {
+        foreach (var text in session1.Chat(prompt1,
+                     new InferenceParams() { Temperature = 0.6f, AntiPrompts = new List<string> { "Developer1:" } }))
+        {
+            Console.Write(text);
+        }
+
+        Console.ForegroundColor = ConsoleColor.Green;
+        prompt1 = Console.ReadLine();
+        Console.ForegroundColor = ConsoleColor.White;
+    }
+}
+
+void DiscordBot(ChatSession session, string prompt)
+{
+    throw new NotImplementedException();
+}
+
+void WriteTheSelection()
+{
+    Console.WriteLine("\nPlease select an option:");
+    Console.WriteLine("1. ChatBot");
+    Console.WriteLine("2. Never-ending Story Teller");
+    Console.WriteLine("3. Discord Bot");
+    Console.WriteLine("4. Exit");
 }
