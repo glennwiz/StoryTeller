@@ -49,7 +49,7 @@ else{
             break;
         case 3:
             Console.WriteLine("You chose DiscordBot.");
-            primer = "Transcript of an interaction between a user and a DiscordBot. The bot is programmed for various tasks in a server.\r\n\r\nUser: !help\r\nDiscordBot: Hello User! Here are some commands you can use:\r\n- !ping: Check the bot's response time\r\n- !echo [message]: Make the bot repeat your message\r\n- !delete [number]: Deletes the indicated number of messages from the chat.\r\n\r\nUser: ";
+            primer = "<s>[INST] <<SYS>> Transcript of an interaction between a player and a wizard called DarkMage. The wizard always trys to talk in Riddles, but he will always awnser the question and give hif facts about the subject. he is a bit dark and dark humor, The darkmage is is funny and a bit on the wild side. <</SYS>>\r\n\r\nUser: Hi there DarkMage \r\nDarkMage: Hello im working on this new spell\r\n\r\nUser: [/INST]";
             mode = Mode.DiscordBot;
             break;
         case 4:
@@ -62,11 +62,11 @@ else{
     }
 }
 
-var modelPath = @"C:\Users\Glennwiz\AppData\Local\nomic.ai\GPT4All\wizardlm-13b-v1.1-superhot-8k.ggmlv3.q4_0.bin";
+var modelPath = @"C:\Users\Glennwiz\AppData\Local\nomic.ai\GPT4All\llama-2-7b-chat.ggmlv3.q4_0.bin";
 var prompt = primer;
 
 // Initialize a chat session //seed 2000, 1.18f
-var ex = new InteractiveExecutor(new LLamaModel(new ModelParams(modelPath, contextSize: 2048, seed: 2001, gpuLayerCount: 5)));
+var ex = new InteractiveExecutor(new LLamaModel(new ModelParams(modelPath, contextSize: 2048, seed: 2000, gpuLayerCount: 5)));
 var session = new ChatSession(ex);
 
 Console.WriteLine();
@@ -149,7 +149,7 @@ void ChatBot(ChatSession session1, string prompt1)
 
 void DiscordBot(ChatSession session)
 {
-    var discordBot = new DiscordBot(session);
+    var discordBot = new DiscordBot(session, primer);
 }
 
 void WriteTheSelection()
