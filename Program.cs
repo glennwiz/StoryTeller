@@ -1,9 +1,13 @@
 ﻿using Bot_test.Classes;
 using LLama;
 using LLama.Common;
+using StoryTeller;
 
 var primer = "default";
 var mode = Mode.Exit;
+
+
+
 
 var choice = 0;
 
@@ -45,6 +49,7 @@ else{
             break;
         case 3:
             Console.WriteLine("You chose DiscordBot.");
+            primer = "Transcript of an interaction between a user and a DiscordBot. The bot is programmed for various tasks in a server.\r\n\r\nUser: !help\r\nDiscordBot: Hello User! Here are some commands you can use:\r\n- !ping: Check the bot's response time\r\n- !echo [message]: Make the bot repeat your message\r\n- !delete [number]: Deletes the indicated number of messages from the chat.\r\n\r\nUser: ";
             mode = Mode.DiscordBot;
             break;
         case 4:
@@ -57,7 +62,7 @@ else{
     }
 }
 
-var modelPath = "C:\\dev\\LLMs\\llama-2-7b-chat.ggmlv3.q3_K_L.bin";
+var modelPath = @"C:\Users\Glennwiz\AppData\Local\nomic.ai\GPT4All\wizardlm-13b-v1.1-superhot-8k.ggmlv3.q4_0.bin";
 var prompt = primer;
 
 // Initialize a chat session //seed 2000, 1.18f
@@ -78,7 +83,7 @@ else if(mode == Mode.ChatBot)
 }
 else if(mode == Mode.DiscordBot)
 {
-    DiscordBot(session, prompt);
+    DiscordBot(session);
 }
 
 // save the oki 
@@ -142,9 +147,9 @@ void ChatBot(ChatSession session1, string prompt1)
     }
 }
 
-void DiscordBot(ChatSession session, string prompt)
+void DiscordBot(ChatSession session)
 {
-    throw new NotImplementedException();
+    var discordBot = new DiscordBot(session);
 }
 
 void WriteTheSelection()
