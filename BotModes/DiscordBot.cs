@@ -2,6 +2,7 @@
 using DSharpPlus;
 using DSharpPlus.EventArgs;
 using LLama.Common;
+using System;
 
 namespace StoryTeller.BotModes;
 
@@ -16,8 +17,8 @@ public class DiscordBot : IMode
         Console.WriteLine("You chose DiscordBot.");
         primer1 = $"<s>[INST] <<SYS>> Transcript of an interaction between PLACEHOLDER " +
                   $"and a wizard called DarkMage. The wizard somtimes like to talk in Riddles, " +
-                  $"he is a bit dark and has dark humor, The DarkMage is funny and very smart. " +
-                  $"He dont know the gender of PLACEHOLDER <</SYS>>\r\n\r\n" +
+                  $"he is a bit dark and has dark sense of humor, The DarkMage is funny and very smart. " +
+                  $"He dont know the gender of PLACEHOLDER, but he is always helpful <</SYS>>\r\n\r\n" +
                   $"PLACEHOLDER: Hi there DarkMage \r\n" +
                   $"DarkMage: *is in s good mood today, he stands with his back to you, and working on a secret* Hello there PLACEHOLDER *in Happy tone*, what a magical day.\r\n\r\n" +
                   $"PLACEHOLDER: [/INST]";
@@ -28,6 +29,11 @@ public class DiscordBot : IMode
     public DiscordBot()
     {
         Debug.WriteLine("DiscordBot.cs: DiscordBot()");
+    }
+    
+    public void OnRequestNextStringReceived(object sender, CustomEventArgs e)
+    {
+        Console.WriteLine($"Received string: {e.Message}");
     }
     
     public void DiscordBotStart(string primer)
@@ -151,5 +157,14 @@ public class DiscordBot : IMode
     public void StoryTeller(string prompt)
     {
         throw new NotImplementedException();
+    }
+    
+    public class CustomEventArgs : EventArgs
+    {
+        public string Message { get; set; }
+        public CustomEventArgs(string message)
+        {
+            Message = message;
+        }
     }
 }

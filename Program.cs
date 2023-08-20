@@ -57,6 +57,7 @@ public class Program
         var prompt = primer;
 
         var session = Sessions.CreateSession(prompt, modelPath);
+        
 
         if (mode == Mode.StoryTeller)
         {
@@ -68,11 +69,14 @@ public class Program
         }
         else if (mode == Mode.DiscordBot)
         {
+            var se= new Sessions("DarkMage");
+            //start on own thread
             DiscordBot? discordBot3 = botMode as DiscordBot;
+            se.RequestNextString += discordBot3.OnRequestNextStringReceived;
+            Task.Run(() => se.StartLoop());
             discordBot3!.DiscordBotStart(primer);
         }
-
-
+        
         void WriteTheSelectionMenu()
         {
             Console.WriteLine("\nPlease select an option:");

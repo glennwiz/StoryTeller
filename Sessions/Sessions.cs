@@ -2,9 +2,10 @@
 using LLama.Common;
 using Newtonsoft.Json;
 using Logging;
+using StoryTeller.BotModes;
 
 namespace StoryTeller;
-
+public delegate void RequestNextStringEventHandler(object sender, DiscordBot.CustomEventArgs e);
 public class Sessions
 {
     [JsonIgnore]
@@ -23,6 +24,31 @@ public class Sessions
         Username = username;
         AllSessions.Add(this);
     }
+    
+    public event RequestNextStringEventHandler RequestNextString;
+
+    public void StartLoop()
+    {
+        Thread thread = new Thread(() =>
+        {
+            while (true)
+            {
+                // Some delay (to prevent infinite fast loop)
+                Thread.Sleep(5000);
+
+                // Trigger the event with "OK" string
+                OnRequestNextString(new DiscordBot.CustomEventArgs("OK" + DateTime.Now));
+            }
+        });
+
+        thread.Start();
+    }
+
+    protected virtual void OnRequestNextString(DiscordBot.CustomEventArgs e)
+    {
+        RequestNextString?.Invoke(this, e);
+    }
+    
     
     public void SaveSession()
     {
