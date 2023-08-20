@@ -1,7 +1,6 @@
-﻿using System.Data.SqlTypes;
-using StoryTeller;
+﻿using StoryTeller.Classes;
 
-namespace Bot_test.Classes
+namespace StoryTeller
 {
     public class SentenceGenerator
     {
@@ -37,8 +36,12 @@ namespace Bot_test.Classes
                 $"The {timePeriod} era sets the scene for this {genre} narrative. At its core is {character}, driven by {emotion}, and a defining moment when they {action} a {obj} in {setting}. Yet, the story's essence is captured in its twist: {plotTwist}. A profound look into {theme}.",
                 $"In this {genre} odyssey from the {timePeriod}, {character} stands out. Dominated by feelings of {emotion}, a turning point emerges as they {action} a {obj} in {setting}. But the heart-stopping moment? {plotTwist}. It's an exploration of {theme} at its finest."
             };
+            
+            var template = templates[Helper.random.Next(templates.Count)];
+            var postfixOnChapter = template + "\r\n\r\\r\nChapter 1:\r\n";
 
-            return templates[Helper.random.Next(templates.Count)];
+
+            return postfixOnChapter;
         }
 
         public List<string> Get50Primers(Emotions emotions, GenereRoot genres, TimePeriods timePeriods, CharRoot characters, Actions actions, Objects objects, SettingsRoot settings, PlotTwists plotTwists, Themesroot themes)

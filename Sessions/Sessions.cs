@@ -1,6 +1,7 @@
 ﻿using LLama;
 using LLama.Common;
 using Newtonsoft.Json;
+using Logging;
 
 namespace StoryTeller;
 
@@ -9,7 +10,10 @@ public class Sessions
     [JsonIgnore]
     public static List<Sessions> AllSessions { get; } = new List<Sessions>();
     [JsonIgnore]
-    public static ChatSession ChatSession { get; set; }
+    public static ChatSession? ChatSession { get; set; }
+    [JsonIgnore]
+    public static LoggerService LoggingService { get; set; }  
+    
     
     public string Username { get; set; }
     public Dictionary<string, string> Prompts { get; set; } = new Dictionary<string, string>();

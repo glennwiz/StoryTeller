@@ -1,15 +1,14 @@
 ﻿using System.Diagnostics;
 using DSharpPlus;
 using DSharpPlus.EventArgs;
-using LLama;
 using LLama.Common;
 
-namespace StoryTeller;
+namespace StoryTeller.BotModes;
 
 public class DiscordBot : IMode
 {
     List<int> runList = new List<int>();
-    private DiscordClient discord;
+    private  DiscordClient discord;
     
     public static string DiscordPrimer(out Mode mode1)
     {

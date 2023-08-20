@@ -1,40 +1,46 @@
 ﻿using LLama.Common;
-using StoryTeller;
+using StoryTeller.Classes;
 
-namespace Bot_test.Classes;
+namespace StoryTeller.BotModes;
 
 public class StoryTellerBot : IMode
 {
     public void StoryTeller(string s)
     {
+        var stringToPrint = "";
         while (s != "stop")
         {
+            stringToPrint = "";
             foreach (var text in Sessions.ChatSession.Chat(s,
-                         new InferenceParams() { Temperature = 0.6f, AntiPrompts = new List<string> { "\r\n" } }))
+                         new InferenceParams() { Temperature = 0.8f, AntiPrompts = new List<string> { "." } }))
             {
                 Console.Write(text);
+                stringToPrint += text;
             }
-
-            s = ".";
+            Sessions.LoggingService.LogMessage(stringToPrint);
+            s = " ";
         }
     }
     
-    public static string NeverEndingStoryTellerPrimer(out Mode mode2)
+    public static string NeverEndingStoryTellerPrimer(out Mode mode)
     {
-        string s1;
+        string primer;
 
         Console.WriteLine("You chose Never-ending Story Teller.");
 
         while (true)
         {
-            s1 = GetPrimer();
-            Console.WriteLine("Generated Primer: " + s1);
+            primer = GetPrimer();
+            Console.WriteLine("Generated Primer: " + primer);
+            Sessions.LoggingService.LogMessage("Generated Primer: " + primer);
             Console.WriteLine("Do you want to use this Primer[y/n]:");
+            
             string response = Console.ReadLine();
-
+            
             if (response.Equals("y", StringComparison.OrdinalIgnoreCase))
             {
-                mode2 = Mode.StoryTeller;
+                Sessions.LoggingService.LogMessage("Chosen Primer: " + primer);
+                mode = Mode.StoryTeller;
                 break;
             }
             else if (!response.Equals("n", StringComparison.OrdinalIgnoreCase))
@@ -43,7 +49,7 @@ public class StoryTellerBot : IMode
             }
         }
 
-        return s1;
+        return primer;
 
         static string GetPrimer()
         {
@@ -57,20 +63,21 @@ public class StoryTellerBot : IMode
             var pathToThemesJson = "Themes.json";
             var pathToTimePeriodsJson = "TimePeriods.json";
 
-            var themes = Bot_test.DataLoader.Load<Themesroot>(pathToThemesJson);
-            var genres = Bot_test.DataLoader.Load<GenereRoot>(pathToGenresJson);
-            var objects = Bot_test.DataLoader.Load<Objects>(pathToObjectsJson);
-            var actions = Bot_test.DataLoader.Load<Actions>(pathToActionsJson);
-            var settings = Bot_test.DataLoader.Load<SettingsRoot>(pathToSettingsJson);
-            var emotions = Bot_test.DataLoader.Load<Emotions>(pathToEmotionsJson);
-            var characters = Bot_test.DataLoader.Load<CharRoot>(pathToCharactersJson);
-            var plotTwists = Bot_test.DataLoader.Load<PlotTwists>(pathToPlotTwistsJson);
-            var timePeriods = Bot_test.DataLoader.Load<TimePeriods>(pathToTimePeriodsJson);
+            var themes = DataLoader.Load<Themesroot>(pathToThemesJson);
+            var genres = DataLoader.Load<GenereRoot>(pathToGenresJson);
+            var objects = DataLoader.Load<Objects>(pathToObjectsJson);
+            var actions = DataLoader.Load<Actions>(pathToActionsJson);
+            var settings = DataLoader.Load<SettingsRoot>(pathToSettingsJson);
+            var emotions = DataLoader.Load<Emotions>(pathToEmotionsJson);
+            var characters = DataLoader.Load<CharRoot>(pathToCharactersJson);
+            var plotTwists = DataLoader.Load<PlotTwists>(pathToPlotTwistsJson);
+            var timePeriods = DataLoader.Load<TimePeriods>(pathToTimePeriodsJson);
 
             var sentenceGenerator = new SentenceGenerator();
 
             var generatedText = sentenceGenerator.GenerateSentence(emotions, genres, timePeriods, characters, actions,
                 objects, settings, plotTwists, themes);
+           
             return generatedText;
         }
     }

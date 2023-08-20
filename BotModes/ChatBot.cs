@@ -1,7 +1,6 @@
-﻿using LLama;
-using LLama.Common;
+﻿using LLama.Common;
 
-namespace StoryTeller;
+namespace StoryTeller.BotModes;
 
 public class ChatBot : IMode
 {

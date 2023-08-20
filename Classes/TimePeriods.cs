@@ -1,4 +1,4 @@
-﻿namespace Bot_test.Classes
+﻿namespace StoryTeller.Classes
 {
     public class TimePeriods
     {

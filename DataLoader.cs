@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Bot_test
+namespace StoryTeller
 {
     public static class DataLoader
     {
