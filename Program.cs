@@ -57,7 +57,7 @@ else{
     }
 }
 
-var modelPath = "C:\\dev\\LLMs\\llama-2-7b-chat.ggmlv3.q3_K_L.bin";
+var modelPath = @"C:\Users\Glennwiz\AppData\Local\nomic.ai\GPT4All\llama-2-7b-chat.ggmlv3.q4_0.bin";
 var prompt = primer;
 
 // Initialize a chat session //seed 2000, 1.18f
