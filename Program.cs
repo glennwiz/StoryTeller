@@ -1,7 +1,10 @@
-﻿using Bot_test.Classes;
+﻿using System.Diagnostics;
+using Bot_test.Classes;
 using LLama;
 using LLama.Common;
 using StoryTeller;
+using Newtonsoft.Json;
+
 
 var primer = "default";
 var mode = Mode.Exit;
@@ -11,7 +14,7 @@ var mode = Mode.Exit;
 
 var choice = 0;
 
-WriteTheSelection();
+WriteTheSelectionMenu();
 
 var result = int.TryParse(Console.ReadLine(), out choice);
 
@@ -53,6 +56,10 @@ else{
             mode = Mode.DiscordBot;
             break;
         case 4:
+            Console.WriteLine("you chose CoderPal.");
+            mode = Mode.CoderPal;
+            break;
+        case 5:
             Console.WriteLine("Exiting...");
             mode = Mode.Exit;
             break;
@@ -62,7 +69,7 @@ else{
     }
 }
 
-var modelPath = @"C:\Users\Glennwiz\AppData\Local\nomic.ai\GPT4All\llama-2-7b-chat.ggmlv3.q4_0.bin";
+var modelPath = @"C:\Users\Glennwiz\AppData\Local\nomic.ai\GPT4All\wizardlm-13b-v1.1-superhot-8k.ggmlv3.q4_0.bin";
 var prompt = primer;
 
 // Initialize a chat session //seed 2000, 1.18f
@@ -112,7 +119,10 @@ static string GetPrimer()
     var timePeriods = Bot_test.DataLoader.Load<TimePeriods>(pathToTimePeriodsJson);
 
     var sentenceGenerator = new SentenceGenerator();
-
+    var debugPrimers = sentenceGenerator.Get50Primers(emotions, genres, timePeriods, characters, actions, objects, settings, plotTwists, themes);
+    //debug print the 50 primers
+    Debug.WriteLine(JsonConvert.SerializeObject(debugPrimers, Formatting.Indented));
+    
     var generatedText = sentenceGenerator.GenerateSentence(emotions, genres, timePeriods, characters, actions, objects, settings, plotTwists, themes);
     return generatedText;
 }
@@ -124,9 +134,10 @@ void StoryTeller(string s, ChatSession chatSession)
         foreach (var text in chatSession.Chat(s,
                      new InferenceParams() { Temperature = 0.6f, AntiPrompts = new List<string> { "\r\n" } }))
         {
+            Debug.WriteLine("Im outside the foreach loop ");
             Console.Write(text);
         }
-
+        Debug.WriteLine("Im outside the foreach loop ");
         s = ".";
     }
 }
@@ -152,11 +163,12 @@ void DiscordBot(ChatSession session)
     var discordBot = new DiscordBot(session, primer);
 }
 
-void WriteTheSelection()
+void WriteTheSelectionMenu()
 {
     Console.WriteLine("\nPlease select an option:");
     Console.WriteLine("1. ChatBot");
     Console.WriteLine("2. Never-ending Story Teller");
     Console.WriteLine("3. Discord Bot");
-    Console.WriteLine("4. Exit");
+    Console.WriteLine("4. CoderPal");
+    Console.WriteLine("5. Exit");
 }
