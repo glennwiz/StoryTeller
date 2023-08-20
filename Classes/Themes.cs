@@ -1,6 +1,6 @@
 ﻿using StoryTeller;
 
-namespace Bot_test.Classes
+namespace StoryTeller.Classes
 {
     public class Themesroot
     {
