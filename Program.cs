@@ -1,7 +1,10 @@
-﻿using Bot_test.Classes;
+﻿using System.Diagnostics;
+using Bot_test.Classes;
 using LLama;
 using LLama.Common;
 using StoryTeller;
+using Newtonsoft.Json;
+
 
 IMode BotMode = null;
 var primer = "default";
@@ -9,7 +12,7 @@ var mode = Mode.Exit;
 
 var choice = 0;
 
-WriteTheSelection();
+WriteTheSelectionMenu();
 
 var result = int.TryParse(Console.ReadLine(), out choice);
 
@@ -32,6 +35,10 @@ else{
             BotMode = new DiscordBot();
             break;
         case 4:
+            Console.WriteLine("you chose CoderPal.");
+            mode = Mode.CoderPal;
+            break;
+        case 5:
             Console.WriteLine("Exiting...");
             mode = Mode.Exit;
             break;
@@ -66,13 +73,14 @@ void DiscordBotStart()
     var discordBot = DiscordBotStart();
 }
 
-void WriteTheSelection()
+void WriteTheSelectionMenu()
 {
     Console.WriteLine("\nPlease select an option:");
     Console.WriteLine("1. ChatBot");
     Console.WriteLine("2. Never-ending Story Teller");
     Console.WriteLine("3. Discord Bot");
-    Console.WriteLine("4. Exit");
+    Console.WriteLine("4. CoderPal");
+    Console.WriteLine("5. Exit");
 }
 
 

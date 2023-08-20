@@ -5,6 +5,11 @@
     public Genre Mystery { get; set; }
     public Genre Romance { get; set; }
     public Genre Horror { get; set; }
+    
+    public List<Genre>  GetAllGenres()
+    {
+        return new List<Genre> { Fantasy, SciFi, Mystery, Romance, Horror };
+    }
 }
 
 public class Genre
