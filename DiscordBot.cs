@@ -7,6 +7,7 @@ using LLama.Common;
 namespace StoryTeller;
 public class DiscordBot
 {
+    List<int> runList = new List<int>();
     private DiscordClient discord;
     public DiscordBot(ChatSession chatSession, string primer)
     {
@@ -19,6 +20,11 @@ public class DiscordBot
         
         discord.MessageCreated += async (s, e) =>
         {
+            //i want to time request
+            var watch = Stopwatch.StartNew();
+            var startTick = watch.ElapsedTicks;
+            Debug.WriteLine("StartTick: " + startTick);
+            
             if (e.Message.Author.IsBot)
             {
                 return;
@@ -59,10 +65,29 @@ public class DiscordBot
             reply = reply.Replace("DarkMage:", "");
             
             //i need to trim the primer in front, it cant grow forever
-            //if lengt is greater then 200 trim front so that only 200 chars remain
+            //if lengt is greater then 300 trim front so that only 300 tokens remain
+            if (primer.Length > 300)
+            {
+                primer = primer.Substring(primer.Length - 300);
+            }
             
             
+            watch.Stop();
+            var endTick = watch.ElapsedTicks;
+            Debug.WriteLine("EndTick: " + endTick);
+            Debug.WriteLine("Ticks: " + (endTick - startTick));
+            Debug.WriteLine("Milliseconds: " + watch.ElapsedMilliseconds);
+            Debug.WriteLine("Seconds: " + watch.Elapsed.Seconds);
+            Debug.WriteLine("Minutes: " + watch.Elapsed.Minutes);
             
+            //want to save the watch outside of the function to compare runs and see if it gets slower over time
+            runList.Add((int)watch.ElapsedMilliseconds);
+             //print all the runs
+             for (int i = 0; i < runList.Count; i++)
+             {
+                 Debug.WriteLine("run " + i + " took " + runList[i] + "ms");
+             }
+             
             await e.Message.RespondAsync(reply);
         };
         
