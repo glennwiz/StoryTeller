@@ -11,6 +11,7 @@
 *.sln.docstates
 .idea/
 Token.txt
+Versions/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -363,3 +364,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Versions/
