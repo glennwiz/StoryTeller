@@ -1,4 +1,6 @@
-﻿namespace Bot_test.Classes
+﻿using StoryTeller;
+
+namespace Bot_test.Classes
 {
     public class Themesroot
     {
@@ -12,6 +14,12 @@
         public Theme Revenge { get; set; }
         public Theme Discovery { get; set; }
         public Theme Redemption { get; set; }
+
+        public List<string> GetAllThemes()
+        {
+            //use the helper method to get a random item from each list
+            return new List<string> { Helper.GetRandom(Love.Keywords), Helper.GetRandom(Friendship.Keywords), Helper.GetRandom(Revenge.Keywords), Helper.GetRandom(Discovery.Keywords), Helper.GetRandom(Redemption.Keywords) };
+        }
     }
 
     public class Theme

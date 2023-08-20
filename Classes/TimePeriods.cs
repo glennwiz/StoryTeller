@@ -6,6 +6,18 @@
         public Present Present { get; set; }
         public Future Future { get; set; }
         public Timeless Timeless { get; set; }
+
+        public List<string> GetAllTimePeriods()
+        { 
+            //return the names of all the properties in this class as a list of strings
+            var returnList = new List<string>();
+            foreach (var property in this.GetType().GetProperties())
+            {
+                returnList.Add(property.Name);
+            }
+
+            return returnList;
+        }
     }
 
     public class Past
