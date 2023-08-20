@@ -3,6 +3,5 @@
     ChatBot,
     StoryTeller,
     DiscordBot,
-    Exit,
-    CoderPal
+    Exit
 }
