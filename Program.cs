@@ -1,5 +1,4 @@
-﻿using System;
-using Logging;
+﻿using Logging;
 using StoryTeller;
 using StoryTeller.BotModes;
 
@@ -10,7 +9,7 @@ public class Program
         var logger = new LoggerService(@"c:\temp\");
         Sessions.LoggingService = logger;
         Sessions.LoggingService.LogMessage("Program started.");
-        
+
         IMode? botMode = null;
         var primer = "default";
         var mode = Mode.Exit;
@@ -57,26 +56,9 @@ public class Program
         var prompt = primer;
 
         var session = Sessions.CreateSession(prompt, modelPath);
-        
 
-        if (mode == Mode.StoryTeller)
-        {
-            botMode?.StoryTeller(prompt);
-        }
-        else if (mode == Mode.ChatBot)
-        {
-            ChatBot.Chat(prompt);
-        }
-        else if (mode == Mode.DiscordBot)
-        {
-            var se= new Sessions("DarkMage");
-            //start on own thread
-            DiscordBot? discordBot3 = botMode as DiscordBot;
-            se.RequestNextString += discordBot3.OnRequestNextStringReceived;
-            Task.Run(() => se.StartLoop());
-            discordBot3!.DiscordBotStart(primer);
-        }
-        
+        Sessions.ModeStart(botMode, primer, mode, prompt);
+
         void WriteTheSelectionMenu()
         {
             Console.WriteLine("\nPlease select an option:");
