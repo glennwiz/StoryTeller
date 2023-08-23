@@ -52,7 +52,7 @@ public class Program
             }
         }
 
-        var modelPath = @"C:\Users\Glennwiz\AppData\Local\nomic.ai\GPT4All\llama-2-7b-chat.ggmlv3.q4_0.bin";
+        var modelPath = @"C:\dev\LLMs\llama-2-13b-chat.ggmlv3.q4_K_M.bin";
         var prompt = primer;
 
         var session = Sessions.CreateSession(prompt, modelPath);
