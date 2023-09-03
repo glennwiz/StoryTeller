@@ -57,7 +57,7 @@ public class Program
             }
         }
 
-        var modelPath = @"C:\dev\LLMs\llama-2-13b-chat.ggmlv3.q4_K_M.bin";
+        var modelPath = @"C:\dev\LLMs\llama-2-7b-chat.ggmlv3.q4_0.bin";
 
         var prompt = primer;
 

@@ -1,4 +1,5 @@
-﻿using LLama;
+﻿using System.Text;
+using LLama;
 using LLama.Common;
 using Logging;
 using Newtonsoft.Json;
@@ -61,9 +62,15 @@ public class Sessions
                 "\u003C/s\u003E\u003C/p\u003E\n\n"
             }
         });
+        
         foreach (var text in chat)
         {
-            reply += text.ToLower();
+            //set utf-8 encoding
+            Encoding utf8 = Encoding.UTF8;
+            byte[] utfBytes = utf8.GetBytes(text);
+            string utf8Text = utf8.GetString(utfBytes, 0, utfBytes.Length);
+            
+            reply += utf8Text.ToLower();
             Console.Write(text);
         }
         

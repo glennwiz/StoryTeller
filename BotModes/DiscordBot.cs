@@ -176,7 +176,7 @@ public class DiscordBot : IMode
             
             if(discordUsername == "glennwiz")
             {
-                discordUsername = "White Mage";
+                //discordUsername = "White Mage";
             }
             
             //Check if the user has a session
@@ -190,9 +190,7 @@ public class DiscordBot : IMode
                 //If the user doesn't have a session, create one
                 Sessions.AllSessions.Add(new Sessions(discordUsername));
             }
-
-            //Sessions.AllSessions.Add(new Sessions(discordUsername));
-
+            
             await e.Message.Channel.TriggerTypingAsync();  // Bot starts typing
 
             //print the message to the console
@@ -202,6 +200,10 @@ public class DiscordBot : IMode
 
             //this will be the primer for the bot
             var theMessage = e.Message.Content.ToLower();
+            //add DarkMage: to the message
+            theMessage = theMessage + ". " + "DarkMage: ";
+            
+            
             primer = primer.Replace("PLACEHOLDER", discordUsername);
             primer += " " + theMessage + "\r\n";
 
@@ -219,6 +221,7 @@ public class DiscordBot : IMode
             Debug.WriteLine("Reply is now: " + reply);
             //reply = reply.Remove(reply.Length - (discordUsername.Length + 1));
             reply = reply.Replace("DarkMage:", "");
+            reply = reply.Replace("</s>", "");
             reply = reply.Replace("darkmage:", "");
             reply = reply.Replace(discordUsername+":", "");
             reply = reply.Replace("you:", "");
