@@ -17,6 +17,11 @@ namespace Logging
             bool running = true; //TODO; make config parameter
             if (running)
             {
+                if(message == null || //whitespace is not allowed
+                   message == string.Empty)
+                {
+                    message = "null";
+                }
                 if (string.IsNullOrWhiteSpace(message))
                 {
                     throw new ArgumentException("Message cannot be null or whitespace.", nameof(message));

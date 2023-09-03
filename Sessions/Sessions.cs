@@ -43,11 +43,28 @@ public class Sessions
         running = true;
         var reply = "";
 
-        var chat = ChatSession?.Chat(primer, new InferenceParams() {Temperature = 0.9f, AntiPrompts = new List<string> {discordUsername + ":"}});
+        var chat = ChatSession?.Chat(primer, new InferenceParams()
+        {
+            MaxTokens = 200, 
+            PathSession = @"c:\dev\LLMs\",
+            Temperature = 0.9f, 
+            TopK = 100,
+            FrequencyPenalty = 0.9f,
+            AntiPrompts = new List<string>
+            {
+                discordUsername + ":",
+                "\u003C/s\u003E", 
+                "\n#",
+                "\n"+discordUsername+":", 
+                "\n*"+discordUsername, 
+                "\n\r\n\r\n\r",
+                "\u003C/s\u003E\u003C/p\u003E\n\n"
+            }
+        });
         foreach (var text in chat)
         {
+            reply += text.ToLower();
             Console.Write(text);
-            reply += text;
         }
         
         LastReply = reply;
@@ -72,7 +89,7 @@ public class Sessions
         var seeNext = random.Next();
 
         var ex = new InteractiveExecutor(
-            new LLamaModel(new ModelParams(modelPath, contextSize: 2048, seed: seeNext, gpuLayerCount: 5)));
+            new LLamaModel(new ModelParams(modelPath, contextSize: 2048 *2, seed: seeNext, gpuLayerCount: 5)));
         var chatSession = new ChatSession(ex);
         ChatSession = chatSession;
 
@@ -99,6 +116,10 @@ public class Sessions
             //start on own thread
             DiscordBot? discordBot3 = botMode as DiscordBot;
             discordBot3!.DiscordBotStart(primer);
+        }
+        else if (mode == Mode.LoopbackBot)
+        {
+            botMode?.StoryTeller(prompt);
         }
     }
 }

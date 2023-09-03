@@ -173,6 +173,12 @@ public class DiscordBot : IMode
             }
 
             var discordUsername = e.Author.Username;
+            
+            if(discordUsername == "glennwiz")
+            {
+                discordUsername = "White Mage";
+            }
+            
             //Check if the user has a session
             if (Sessions.AllSessions.Any(x => x.Username == discordUsername))
             {
@@ -192,6 +198,7 @@ public class DiscordBot : IMode
             //print the message to the console
             Debug.WriteLine("-> | message | " + e.Message.Content);
             var message = e.Message.Content;
+            Console.WriteLine(message);
 
             //this will be the primer for the bot
             var theMessage = e.Message.Content.ToLower();
@@ -210,12 +217,18 @@ public class DiscordBot : IMode
             
             primer += " " + reply;
             Debug.WriteLine("Reply is now: " + reply);
-            reply = reply.Remove(reply.Length - (discordUsername.Length + 1));
+            //reply = reply.Remove(reply.Length - (discordUsername.Length + 1));
             reply = reply.Replace("DarkMage:", "");
-
+            reply = reply.Replace("darkmage:", "");
+            reply = reply.Replace(discordUsername+":", "");
+            reply = reply.Replace("you:", "");
+            reply = reply.Replace(discordUsername.ToLower()+":", "");
+            reply = reply.Replace("\u003C/s\u003E\u003C/p\u003E", "");
+            reply = reply.Replace("glennwiz:", "");
+            reply.Trim().TrimEnd().TrimStart();
             if (primer.Length > 400)
             {
-                primer = primer.Substring(primer.Length - 400);
+                primer = primer.Substring(primer.Length - 400).TrimEnd();
             }
 
             watch.Stop();
