@@ -4,5 +4,6 @@
     StoryTeller,
     DiscordBot,
     Exit,
-    CoderPal
+    CoderPal,
+    LoopbackBot
 }

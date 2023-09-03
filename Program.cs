@@ -39,10 +39,15 @@ public class Program
                     botMode = new DiscordBot();
                     break;
                 case 4:
-                    Console.WriteLine("you chose CoderPal.");
+                    Console.WriteLine("you chose CoderPal");
                     mode = Mode.CoderPal;
                     break;
                 case 5:
+                    primer = LoopbackBot.LoopbackPrimer(out mode);
+                    mode = Mode.LoopbackBot;
+                    botMode = new LoopbackBot();
+                    break;
+                case 6:
                     Console.WriteLine("Exiting...");
                     mode = Mode.Exit;
                     break;
@@ -52,7 +57,7 @@ public class Program
             }
         }
 
-        var modelPath = @"C:\Users\Glennwiz\AppData\Local\nomic.ai\GPT4All\llama-2-7b-chat.ggmlv3.q4_0.bin";
+        var modelPath = @"c:\dev\LLMs\codellama-7b-python.ggmlv3.Q3_K_S.bin";
         var prompt = primer;
 
         var session = Sessions.CreateSession(prompt, modelPath);
@@ -66,7 +71,8 @@ public class Program
             Console.WriteLine("2. Never-ending Story Teller");
             Console.WriteLine("3. Discord Bot");
             Console.WriteLine("4. CoderPal");
-            Console.WriteLine("5. Exit");
+            Console.WriteLine("5. Loopback bot");
+            Console.WriteLine("6. Exit");
         }
     }
 }
