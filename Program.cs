@@ -57,7 +57,8 @@ public class Program
             }
         }
 
-        var modelPath = @"c:\dev\LLMs\codellama-7b-python.ggmlv3.Q3_K_S.bin";
+        var modelPath = @"C:\dev\LLMs\llama-2-13b-chat.ggmlv3.q4_K_M.bin";
+
         var prompt = primer;
 
         var session = Sessions.CreateSession(prompt, modelPath);
