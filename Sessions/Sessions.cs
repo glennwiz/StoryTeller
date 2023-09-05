@@ -44,7 +44,7 @@ public class Sessions
         running = true;
         var reply = "";
 
-        var chat = ChatSession?.Chat(primer, new InferenceParams()
+        IEnumerable<string>? chat = ChatSession?.Chat(primer, new InferenceParams()
         {
             MaxTokens = -1, 
             PathSession = @"c:\dev\LLMs\",
@@ -64,7 +64,7 @@ public class Sessions
             For example, if tokens A, B, and C have a probability of 0.3, 0.2, and 0.1 and the topP value is 0.5, 
             then the model will select either A or B as the next token by using the temperature and exclude C as a candidate. 
             The default topP value is 0.95.*/
-            FrequencyPenalty = 1.2f, /*Negative values can be used to increase the likelihood of repetition.*/
+            FrequencyPenalty = -1.2f, /*Negative values can be used to increase the likelihood of repetition.*/
             AntiPrompts = new List<string>
             {
                 discordUsername + ":",
@@ -113,8 +113,8 @@ public class Sessions
             new LLamaModel(new ModelParams(modelPath, contextSize: 2048 *2, seed: seeNext, gpuLayerCount: 5)));
         var chatSession = new ChatSession(ex);
         ChatSession = chatSession;
-
-        Console.WriteLine();
+        
+        Console.WriteLine("Loading model...");
 
         //Write the primer
         Console.Write(prompt);

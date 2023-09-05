@@ -202,7 +202,7 @@ public class DiscordBot : IMode
             //this will be the primer for the bot
             var theMessage = e.Message.Content.ToLower();
             //add DarkMage: to the message
-            theMessage = theMessage + ". " + "DarkMage: ";
+            theMessage = theMessage + ". " + "\n\rDarkMage: ";
             
             
             primer = primer.Replace("PLACEHOLDER", discordUsername);
@@ -213,11 +213,7 @@ public class DiscordBot : IMode
 
             reply = Sessions.AllSessions.First(x => x.Username == discordUsername).GenerateReplyForDiscord(primer, message, discordUsername);
             reply = reply.Replace("\uFFFD", "").Replace("\u000A", "");
-            foreach (var c in reply)
-            {
-                Debug.WriteLine($"Character: {c}, Unicode: {((int)c).ToString("X4")}");
-            }
-            
+    
             string[] stringsToReplace = 
             {
                 "DarkMage:", 
@@ -240,9 +236,23 @@ public class DiscordBot : IMode
 
             reply = reply.Trim().TrimEnd().TrimStart();
 
-            if (primer.Length > 400)
+            if (primer.Length > 4000)
             {
-                primer = primer.Substring(primer.Length - 400).TrimEnd();
+                //get the primer and store it in a variable
+                var primerTemp = primer;
+                //TODO: Run it trough a Custom Chat History Transform
+
+                var chatHistoryPrefix = "You will be given a text get the important parts of this text a genreate a 3 line MemoryFragment from this" +
+                                        "---" +
+                                        "" + primerTemp +
+                                        "---" + "" +
+                                        "MemoryFragment: ";
+                
+                //store memory fragment in session
+                //Sessions.AllSessions.First(x => x.Username == discordUsername).MemoryFragment = chatHistoryPrefix;
+                
+            
+                primer = primer.Substring(primer.Length - 4000).TrimEnd();
             }
 
             watch.Stop();
