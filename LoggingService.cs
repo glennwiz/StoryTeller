@@ -17,8 +17,7 @@ namespace Logging
             bool running = true; //TODO; make config parameter
             if (running)
             {
-                if(message == null || //whitespace is not allowed
-                   message == string.Empty)
+                if(message is null or "")
                 {
                     message = "null";
                 }

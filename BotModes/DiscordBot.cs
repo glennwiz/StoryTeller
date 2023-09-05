@@ -217,18 +217,28 @@ public class DiscordBot : IMode
                 Debug.WriteLine($"Character: {c}, Unicode: {((int)c).ToString("X4")}");
             }
             
+            string[] stringsToReplace = 
+            {
+                "DarkMage:", 
+                "</s>", 
+                "darkmage:", 
+                $"{discordUsername}:", 
+                "you:", 
+                $"{discordUsername.ToLower()}:", 
+                "\u003C/s\u003E\u003C/p\u003E", 
+                "glennwiz:"
+            };
+            
             primer += " " + reply;
-            Debug.WriteLine("Reply is now: " + reply);
-            //reply = reply.Remove(reply.Length - (discordUsername.Length + 1));
-            reply = reply.Replace("DarkMage:", "");
-            reply = reply.Replace("</s>", "");
-            reply = reply.Replace("darkmage:", "");
-            reply = reply.Replace(discordUsername+":", "");
-            reply = reply.Replace("you:", "");
-            reply = reply.Replace(discordUsername.ToLower()+":", "");
-            reply = reply.Replace("\u003C/s\u003E\u003C/p\u003E", "");
-            reply = reply.Replace("glennwiz:", "");
-            reply.Trim().TrimEnd().TrimStart();
+            Debug.WriteLine($"Reply is now: {reply}");
+
+            foreach (var str in stringsToReplace)
+            {
+                reply = reply.Replace(str, "");
+            }
+
+            reply = reply.Trim().TrimEnd().TrimStart();
+
             if (primer.Length > 400)
             {
                 primer = primer.Substring(primer.Length - 400).TrimEnd();
@@ -284,7 +294,7 @@ public class DiscordBot : IMode
         }
     }
 
-    public async Task RunAsync()
+    private async Task RunAsync()
     {
         await discord.ConnectAsync();
         await Task.Delay(-1);
