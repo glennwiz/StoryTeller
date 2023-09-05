@@ -29,7 +29,7 @@ namespace Logging
                 var logFileName = $"log{DateTime.Now:yyyyMMdd}.json";
                 var logFilePath = Path.Combine(_logFolderPath, logFileName);
 
-                List<LogEntry> logEntries;
+                List<LogEntry>? logEntries;
                 if (File.Exists(logFilePath))
                 {
                     var existingContent = File.ReadAllText(logFilePath);

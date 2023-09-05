@@ -57,8 +57,8 @@ public class Program
             }
         }
 
-        //var modelPath = @"C:\dev\LLMs\llama-2-7b-chat.ggmlv3.q4_0.bin";
-        var modelPath = @"C:\dev\LLMs\Wizard-Vicuna-7B-Uncensored.ggmlv3.q2_K.bin";
+        var modelPath = @"C:\dev\LLMs\llama-2-7b-chat.ggmlv3.q4_0.bin";
+        //var modelPath = @"C:\dev\LLMs\Wizard-Vicuna-7B-Uncensored.ggmlv3.q2_K.bin";
 
         var prompt = primer;
 
