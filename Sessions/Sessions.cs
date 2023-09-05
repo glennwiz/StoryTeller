@@ -111,20 +111,19 @@ public class Sessions
     {
         if (mode == Mode.StoryTeller)
         {
-            botMode?.StoryTeller(prompt);
+            botMode!.StoryTeller(prompt);
         }
         else if (mode == Mode.ChatBot)
         {
-            botMode?.StoryTeller(prompt);
+            botMode!.StoryTeller(prompt);
         }
         else if (mode == Mode.DiscordBot)
         {
-            var discordBot3 = botMode as DiscordBot;
-            discordBot3!.DiscordBotStart(primer);
+            botMode!.StoryTeller(primer);
         }
         else if (mode == Mode.LoopbackBot)
         {
-            botMode?.StoryTeller(prompt);
+            botMode!.StoryTeller(prompt);
         }
     }
 }

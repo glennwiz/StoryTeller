@@ -300,8 +300,8 @@ public class DiscordBot : IMode
         await Task.Delay(-1);
     }
 
-    public void StoryTeller(string prompt)
+    public void StoryTeller(string primer)
     {
-        throw new NotImplementedException();
+        DiscordBotStart(primer);
     }
 }
