@@ -136,10 +136,10 @@ public class DiscordBot : IMode
             """
         };
 
-        Random random = new Random();
-        int index = random.Next(primers.Length);
+        var random = new Random();
+        var index = random.Next(primers.Length);
 
-        string selectedPrimer = primers[index].TrimEnd();
+        var selectedPrimer = primers[index].TrimEnd();
 
         primer = selectedPrimer;
      
@@ -212,7 +212,7 @@ public class DiscordBot : IMode
 
             reply = Sessions.AllSessions.First(x => x.Username == discordUsername).GenerateReplyForDiscord(primer, message, discordUsername);
             reply = reply.Replace("\uFFFD", "").Replace("\u000A", "");
-            foreach (char c in reply)
+            foreach (var c in reply)
             {
                 Debug.WriteLine($"Character: {c}, Unicode: {((int)c).ToString("X4")}");
             }
@@ -276,7 +276,7 @@ public class DiscordBot : IMode
         //want to save the watch outside of the function to compare runs and see if it gets slower over time
         runList.Add((int)watch.ElapsedMilliseconds);
         //print all the runs
-        for (int i = 0; i < runList.Count; i++)
+        for (var i = 0; i < runList.Count; i++)
         {
             Debug.WriteLine("run " + i + " took " + runList[i] + "ms");
         }
@@ -303,14 +303,5 @@ public class DiscordBot : IMode
     public void StoryTeller(string prompt)
     {
         throw new NotImplementedException();
-    }
-
-    public class CustomEventArgs : EventArgs
-    {
-        public string Message { get; set; }
-        public CustomEventArgs(string message)
-        {
-            Message = message;
-        }
     }
 }

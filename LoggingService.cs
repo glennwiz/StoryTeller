@@ -14,7 +14,7 @@ namespace Logging
 
         public void LogMessage(string message, LogLevel logLevel = LogLevel.Information)
         {
-            bool running = true; //TODO; make config parameter
+            var running = true; //TODO; make config parameter
             if (running)
             {
                 if(message is null or "")

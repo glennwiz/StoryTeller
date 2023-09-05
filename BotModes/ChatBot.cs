@@ -6,7 +6,7 @@ public class ChatBot : IMode
 {
     public void StoryTeller(string prompt)
     {
-        throw new NotImplementedException();
+        Chat(prompt);
     }
     
     public static string ChatBotPrimer(out Mode mode3)

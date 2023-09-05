@@ -6,7 +6,7 @@ public static class Helper
     
     public static string GetRandom(List<string> stringList)
     {
-        int index = random.Next(stringList.Count);
+        var index = random.Next(stringList.Count);
         return stringList[index];
     }
 }

@@ -12,8 +12,8 @@
 
     private string GetRandom(List<string> stringList)
     {
-        Random random = new Random();
-        int index = random.Next(stringList.Count);
+        var random = new Random();
+        var index = random.Next(stringList.Count);
         return stringList[index];
     }
 }

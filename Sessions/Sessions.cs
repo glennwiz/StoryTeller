@@ -66,9 +66,9 @@ public class Sessions
         foreach (var text in chat)
         {
             //set utf-8 encoding
-            Encoding utf8 = Encoding.UTF8;
-            byte[] utfBytes = utf8.GetBytes(text);
-            string utf8Text = utf8.GetString(utfBytes, 0, utfBytes.Length);
+            var utf8 = Encoding.UTF8;
+            var utfBytes = utf8.GetBytes(text);
+            var utf8Text = utf8.GetString(utfBytes, 0, utfBytes.Length);
             
             reply += utf8Text.ToLower();
             Console.Write(text);
@@ -83,16 +83,16 @@ public class Sessions
     public void SaveSession()
     {
         var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Sessions", $"{this.Username}.json");
-        string jsonContent = JsonConvert.SerializeObject(this);
+        var jsonContent = JsonConvert.SerializeObject(this);
         File.WriteAllText(path, jsonContent);
     }
 
     public static ChatSession CreateSession(string prompt, string modelPath)
     {
-        DateTime dateTimeForSeed = DateTime.Now;
-        long seed = dateTimeForSeed.Ticks;
+        var dateTimeForSeed = DateTime.Now;
+        var seed = dateTimeForSeed.Ticks;
 
-        Random random = new Random((int)seed);
+        var random = new Random((int)seed);
         var seeNext = random.Next();
 
         var ex = new InteractiveExecutor(
@@ -115,13 +115,11 @@ public class Sessions
         }
         else if (mode == Mode.ChatBot)
         {
-            ChatBot.Chat(prompt);
+            botMode?.StoryTeller(prompt);
         }
         else if (mode == Mode.DiscordBot)
         {
-            var se = new Sessions("DarkMage");
-            //start on own thread
-            DiscordBot? discordBot3 = botMode as DiscordBot;
+            var discordBot3 = botMode as DiscordBot;
             discordBot3!.DiscordBotStart(primer);
         }
         else if (mode == Mode.LoopbackBot)

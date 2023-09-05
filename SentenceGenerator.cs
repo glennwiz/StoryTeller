@@ -51,7 +51,7 @@ namespace StoryTeller
         public List<string> Get50Primers(Emotions emotions, GenereRoot genres, TimePeriods timePeriods, CharRoot characters, Actions actions, Objects objects, SettingsRoot settings, PlotTwists plotTwists, Themesroot themes)
         {
             var primers = new List<string>();
-            for (int i = 0; i < 50; i++)
+            for (var i = 0; i < 50; i++)
             {
                 primers.Add(GenerateSentence(emotions, genres, timePeriods, characters, actions, objects, settings, plotTwists, themes));
             }

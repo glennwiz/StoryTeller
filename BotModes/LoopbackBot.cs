@@ -161,7 +161,7 @@ public class LoopbackBot : IMode
             
             foreach (var text in chat)
             {
-                string cleanedText = Encoding.UTF8.GetString(Encoding.ASCII.GetBytes(text));
+                var cleanedText = Encoding.UTF8.GetString(Encoding.ASCII.GetBytes(text));
                 Console.Write(cleanedText);
                 stringToPrint += cleanedText;
             }
