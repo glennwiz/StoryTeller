@@ -1,5 +1,7 @@
 ﻿
-# CLI and Discord boot for LLm inference
+# C# cli and discord boot for LLM inference
+
+currently supports gguf models 
 
 ![img.png](img.png)
 
