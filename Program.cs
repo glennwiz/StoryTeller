@@ -57,13 +57,11 @@ public class Program
             }
         }
 
-
-
         var prompt = primer;
 
-        var session = Sessions.CreateSession(prompt);
+        Sessions.CreateSession(prompt);
 
-        Sessions.ModeStart(botMode, primer, mode, prompt);
+        Sessions.ModeStart(botMode, mode, prompt);
 
         void WriteTheSelectionMenu()
         {

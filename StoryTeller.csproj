@@ -56,8 +56,5 @@
 
 
 
-  <ItemGroup>
-    <Compile Remove="Templates.cs" />
-  </ItemGroup>
 
 </Project>

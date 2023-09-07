@@ -179,56 +179,28 @@ public class DiscordBot : IMode
             {
                 //discordUsername = "White Mage";
             }
-            
-            //Check if the user has a session
+          
             if (Sessions.AllSessions.Any(x => x.Username == discordUsername))
             {
-                //If the user has a session, load it
                 var session = Sessions.AllSessions.First(x => x.Username == discordUsername);
             }
             else
             {
-                //If the user doesn't have a session, create one
                 Sessions.AllSessions.Add(new Sessions(discordUsername));
             }
             
-            await e.Message.Channel.TriggerTypingAsync();  // Bot starts typing
-
-            //print the message to the console
-            Debug.WriteLine("-> | message | " + e.Message.Content);
+            await e.Message.Channel.TriggerTypingAsync(); 
             var message = e.Message.Content;
-            Console.WriteLine(message);
 
-            //this will be the primer for the bot
-            var theMessage = e.Message.Content.ToLower();
-            //add DarkMage: to the message
-            theMessage = theMessage + ". " + "\n\rDarkMage: ";
-            
-            
-            primer = primer.Replace("PLACEHOLDER", discordUsername);
-            primer += " " + theMessage + "\r\n";
+            primer = Primer(primer, e, discordUsername);
 
-            Debug.WriteLine("-> | primer | " + primer);
-            var reply = "";
-
-            reply = Sessions.AllSessions.First(x => x.Username == discordUsername).GenerateReplyForDiscord(primer, message, discordUsername);
-            reply = reply.Replace("\uFFFD", "").Replace("\u000A", "");
+            var reply = Sessions.AllSessions.First(x => x.Username == discordUsername).GenerateReplyForDiscord(primer, message, discordUsername);
+            reply = Reply(reply);
     
-            string[] stringsToReplace = 
-            {
-                "DarkMage:", 
-                "</s>", 
-                "darkmage:", 
-                $"{discordUsername}:", 
-                "you:", 
-                $"{discordUsername.ToLower()}:", 
-                "\u003C/s\u003E\u003C/p\u003E", 
-                "glennwiz:"
-            };
+            var stringsToReplace = StringsToReplace(discordUsername);
             
             primer += " " + reply;
-            Debug.WriteLine($"Reply is now: {reply}");
-
+       
             foreach (var str in stringsToReplace)
             {
                 reply = reply.Replace(str, "");
@@ -255,9 +227,6 @@ public class DiscordBot : IMode
                 primer = primer.Substring(primer.Length - 4000).TrimEnd();
             }
 
-            watch.Stop();
-            PrintDebugStats(watch, startTick);
-
             //set utf-8 encoding
             var utf8 = Encoding.UTF8;
             var utfBytes = utf8.GetBytes(reply);
@@ -277,6 +246,41 @@ public class DiscordBot : IMode
         discord.Ready += OnBotReady;
 
         RunAsync().GetAwaiter().GetResult(); //Can we use await here?
+    }
+
+    private static string Reply(string reply)
+    {
+        reply = reply.Replace("\uFFFD", "").Replace("\u000A", "");
+        return reply;
+    }
+
+    private static string[] StringsToReplace(string discordUsername)
+    {
+        string[] stringsToReplace =
+        {
+            "DarkMage:",
+            "</s>",
+            "darkmage:",
+            $"{discordUsername}:",
+            "you:",
+            $"{discordUsername.ToLower()}:",
+            "\u003C/s\u003E\u003C/p\u003E",
+            "glennwiz:"
+        };
+        return stringsToReplace;
+    }
+
+    private static string Primer(string primer, MessageCreateEventArgs e, string discordUsername)
+    {
+        var builder = new StringBuilder();
+        var theMessage = e.Message.Content.ToLower() + ". \n\rDarkMage: ";
+        primer = primer.Replace("PLACEHOLDER", discordUsername);
+        builder.Append(primer);
+        builder.Append(" ");
+        builder.Append(theMessage);
+        builder.Append("\r\n");
+        primer = builder.ToString();
+        return primer;
     }
 
     private static Stopwatch Stopwatch(MessageCreateEventArgs e, out long startTick)
@@ -299,11 +303,7 @@ public class DiscordBot : IMode
 
         //want to save the watch outside of the function to compare runs and see if it gets slower over time
         runList.Add((int)watch.ElapsedMilliseconds);
-        //print all the runs
-        for (var i = 0; i < runList.Count; i++)
-        {
-            Debug.WriteLine("run " + i + " took " + runList[i] + "ms");
-        }
+
     }
 
     private async Task OnBotReady(DiscordClient sender, ReadyEventArgs args)

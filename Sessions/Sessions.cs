@@ -101,25 +101,28 @@ public class Sessions
         File.WriteAllText(path, jsonContent);
     }
 
-    public static ChatSession CreateSession(string prompt)
+    public static void CreateSession(string prompt)
     {
-        var dateTimeForSeed = DateTime.Now;
-        var seed = dateTimeForSeed.Ticks;
-
-        var random = new Random((int)seed);
-        var seeNext = random.Next();
+        var seed = RandomGenHelper.GenerateRandomNumber();
         
         var modelPath = @"c:\dev\LLMs\pygmalion-2-13b.Q2_K.gguf";
-        //var modelPath = @"C:\dev\LLMs\llama-2-7b-chat.ggmlv3.q4_0.bin";
-        //var modelPath = @"C:\dev\LLMs\Wizard-Vicuna-7B-Uncensored.ggmlv3.q2_K.bin";
 
-        var ex = new InteractiveExecutor(
-            new LLamaContext(new ModelParams(modelPath)
-            {
-             ContextSize   = 2 * 2048,
-             Seed = seeNext,
-             GpuLayerCount = 5
-            }));
+        //1create a new model params object
+        var @params = new ModelParams(modelPath)
+        {
+            ContextSize = 4096,
+            Seed = seed,
+            GpuLayerCount = 5
+        };
+        
+        //2load the model weights
+        var weights = LLamaWeights.LoadFromFile(@params);
+        
+        //3create a new context
+        var context = weights.CreateContext(@params);
+        
+        //4initialize the context with the weights
+        var ex = new InteractiveExecutor(context);
         var chatSession = new ChatSession(ex);
         ChatSession = chatSession;
         
@@ -127,10 +130,9 @@ public class Sessions
 
         //Write the primer
         Console.Write(prompt);
-        return chatSession;
     }
 
-    public static void ModeStart(IMode? botMode, string primer, Mode mode, string prompt)
+    public static void ModeStart(IMode? botMode, Mode mode, string prompt)
     {
         if (mode == Mode.StoryTeller)
         {
@@ -142,7 +144,7 @@ public class Sessions
         }
         else if (mode == Mode.DiscordBot)
         {
-            botMode!.StoryTeller(primer);
+            botMode!.StoryTeller(prompt);
         }
         else if (mode == Mode.LoopbackBot)
         {
