@@ -42,7 +42,7 @@ namespace StoryTeller
             };
             
             var template = templates[Helper.random.Next(templates.Count)];
-            var postfixOnChapter = template + "\r\n\r\\r\nChapter 1:\r\n";
+            var postfixOnChapter = template + "\r\n\r\\r\nAnd So it begins!!! \r\n";
 
 
             return postfixOnChapter;
@@ -51,7 +51,7 @@ namespace StoryTeller
         public List<string> Get50Primers(Emotions emotions, GenereRoot genres, TimePeriods timePeriods, CharRoot characters, Actions actions, Objects objects, SettingsRoot settings, PlotTwists plotTwists, Themesroot themes)
         {
             var primers = new List<string>();
-            for (int i = 0; i < 50; i++)
+            for (var i = 0; i < 50; i++)
             {
                 primers.Add(GenerateSentence(emotions, genres, timePeriods, characters, actions, objects, settings, plotTwists, themes));
             }
@@ -89,7 +89,7 @@ namespace StoryTeller
             return generatedText;
         }
 
-        public static string GetRandomSettiong()
+        public static string GetRandomSetting()
         {
             var pathToSettingsJson = "Settings.json";
             var settings = DataLoader.Load<SettingsRoot>(pathToSettingsJson);
@@ -126,6 +126,49 @@ namespace StoryTeller
                 objects, settings, plotTwists, themes, name);
            
             return generatedText;
+        }
+
+        public static void GetRandomSentance()
+        {
+            var pathToActionsJson = "Actions.json";
+            var pathToCharactersJson = "Characters.json";
+            var pathToEmotionsJson = "Emotions.json";
+            var pathToGenresJson = "Genres.json";
+            var pathToObjectsJson = "Objects.json";
+            var pathToPlotTwistsJson = "PlotTwists.json";
+            var pathToSettingsJson = "Settings.json";
+            var pathToThemesJson = "Themes.json";
+            var pathToTimePeriodsJson = "TimePeriods.json";
+
+            var themes = DataLoader.Load<Themesroot>(pathToThemesJson);
+            var genres = DataLoader.Load<GenereRoot>(pathToGenresJson);
+            var objects = DataLoader.Load<Objects>(pathToObjectsJson);
+            var actions = DataLoader.Load<Actions>(pathToActionsJson);
+            var settings = DataLoader.Load<SettingsRoot>(pathToSettingsJson);
+            var emotions = DataLoader.Load<Emotions>(pathToEmotionsJson);
+            var characters = DataLoader.Load<CharRoot>(pathToCharactersJson);
+            var plotTwists = DataLoader.Load<PlotTwists>(pathToPlotTwistsJson);
+            var timePeriods = DataLoader.Load<TimePeriods>(pathToTimePeriodsJson);
+
+            var sentenceGenerator = new SentenceGenerator();
+
+            var generatedText = sentenceGenerator.GenerateSmallRandom(emotions, genres, timePeriods, characters, actions,
+                objects, settings, plotTwists, themes);
+           
+            Console.WriteLine(generatedText);
+            
+        }
+
+        private string GenerateSmallRandom(Emotions emotions, GenereRoot genres, TimePeriods timePeriods, CharRoot characters, Actions actions, Objects objects, SettingsRoot settings, PlotTwists plotTwists, Themesroot themes)
+        {
+            
+            
+            var templates = new List<string>
+            {
+                
+            };
+            
+            return GetRandomElement(templates);
         }
     }
 }

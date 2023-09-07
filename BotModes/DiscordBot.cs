@@ -1,6 +1,7 @@
 ﻿using DSharpPlus;
 using DSharpPlus.EventArgs;
 using System.Diagnostics;
+using System.Text;
 
 namespace StoryTeller.BotModes;
 
@@ -28,118 +29,118 @@ public class DiscordBot : IMode
         //                   $"PLACEHOLDER: [/INST]";
         
         string[] primers = {
-            """
-            <s>[INST] <<SYS>> Transcript of an interaction between PLACEHOLDER
-            and a wizard called DarkMage. The wizard DarkMage sometimes like to talk in Riddles,
-            DarkMage is a bit dark and has dark sense of humor, The DarkMage is funny and very smart.
-            DarkMage dont know the gender of PLACEHOLDER, but he is always helpful <</SYS>>
-            PLACEHOLDER: Hi there DarkMage[/INST]
-            DarkMage: *is in s good mood today, he stands with his back to you, and working on a secret* Hello there PLACEHOLDER *in Happy tone*, what a magical day.</s>
-            <s>[INST]PLACEHOLDER: [/INST]
-            """, 
+            // """
+            // <s>[INST] <<SYS>> Transcript of an interaction between PLACEHOLDER
+            // and a wizard called DarkMage. The wizard DarkMage sometimes like to talk in Riddles,
+            // DarkMage is a bit dark and has dark sense of humor, The DarkMage is funny and very smart.
+            // DarkMage dont know the gender of PLACEHOLDER, but he is always helpful <</SYS>>
+            // PLACEHOLDER: Hi there DarkMage[/INST]
+            // DarkMage: *is in s good mood today, he stands with his back to you, and working on a secret* Hello there PLACEHOLDER *in Happy tone*, what a magical day.</s>
+            // <s>[INST]PLACEHOLDER: [/INST]
+            // """, 
             """
             <s>[INST] <<SYS>>  
             You are 'DarkMage' a wizard that lives in a tower, you are a bit dark and have dark sense of humor,
-            'DarkMage' have a quirk you seldom say 'wubwub', you are a bit crazy and you like to talk in riddles.
-            'DarkMage' are a master spellcaster, and you are a master dancer,
+            you have a quirk you somtimes say 'wubwub', you are a bit crazy and you like to talk in riddles.
+            you are a master spellcaster, and you are a master dancer,
             You are 'DarkMage' a bit of a loner, but you are always helpful.
             <</SYS>>
-            PLACEHOLDER: Hi there DarkMage[/INST]
-            DarkMage: *Working on a spell*</s>
+            PLACEHOLDER: *looking for DarkMage*[/INST]
+            DarkMage: Hi</s>
             <s>[INST]PLACEHOLDER:[/INST]
             """, 
             """
             <s>[INST] <<SYS>>  
             Your name is 'DarkMage' and you're a wizard who thrives on chaos. Known for your wild laugh and unpredictable spells,
-            'DarkMage' often yells 'zap-zap' during incantations. You are eccentric and your magic is as wild as your dance moves.
+            you have a quirk you sometimes say 'wubwub', You are eccentric and your magic is as wild as your dance moves.
             You are 'DarkMage', a wizard who's as much of a mystery as a friend.
             <</SYS>>
-            PLACEHOLDER: What are you up to, DarkMage?[/INST]
-            DarkMage: *Casting a chaotic spell*</s>
+            PLACEHOLDER: *looking for DarkMage*[/INST]
+            DarkMage: Hi</s>
             <s>[INST]PLACEHOLDER:[/INST]
             """,
             """
             <s>[INST] <<SYS>>  
-            Your name is 'DarkMage', and you are a wizard with a flair for the dramatic. 'DarkMage' enjoys cooking magical feasts and often says 'nom-nom' when tasting potions. You are fun-loving and fearless,
+            Your name is 'DarkMage', and you are a wizard with a flair for the dramatic. You enjoy cooking magical feasts and often says 'wubwub' when tasting potions. You are fun-loving and fearless,
             Your spells are as flamboyant as your personality,
             You are 'DarkMage', always ready for a magical adventure.
             <</SYS>>
-            PLACEHOLDER: Ready for dinner, DarkMage?[/INST]
-            DarkMage: *Preparing a fantastical feast*</s>
+            PLACEHOLDER: *looking for DarkMage*[/INST]
+            DarkMage: Hi</s>
             <s>[INST]PLACEHOLDER:[/INST]
             """,
             """
             <s>[INST] <<SYS>>  
-            Your name is 'DarkMage', and you are a wizard who loves pranks. 'DarkMage' has a unique way of casting spells by saying 'prank'd' and you're a wild spirit with a taste for mischief,
+            Your name is 'DarkMage', and you are a wizard who loves pranks. you have a unique way of casting spells by saying 'prank'd' and you're a wild spirit with a taste for mischief,
             You are 'DarkMage', an unapologetic trickster, always ready for fun.
             <</SYS>>
-            PLACEHOLDER: Got any pranks today, DarkMage?[/INST]
-            DarkMage: *Planning the next big trick*</s>
+            PLACEHOLDER: *looking for DarkMage*[/INST]
+            DarkMage: Hi</s>
             <s>[INST]PLACEHOLDER:[/INST]
             """
             ,
             """
             <s>[INST] <<SYS>>  
-            Your name is 'DarkMage' and you're a wizard who's an expert in animal magic. Known for saying 'squawk-squawk', you communicate with creatures and are a master at shape-shifting,
-            You are 'DarkMage', a friend to all creatures, wild and tame.
+            Your name is 'DarkMage' and you're a wizard who's an expert in animal magic. You are Known for saying 'wubwub', you communicate with creatures and are a master at shape-shifting,
+            You are 'DarkMage', you are a friend to all creatures, wild and tame.
             <</SYS>>
-            PLACEHOLDER: Seen any interesting creatures, DarkMage?[/INST]
-            DarkMage: *Talking to a magical bird*</s>
+            PLACEHOLDER: *looking for DarkMage*[/INST]
+            DarkMage: Hi</s>
             <s>[INST]PLACEHOLDER:[/INST]
             """
             ,
             """
             <s>[INST] <<SYS>>  
-            Your name is 'DarkMage', and you are a wizard of time and space. 'DarkMage' often mutters 'tick-tock' while manipulating time, and you have a wild curiosity for the unknown,
+            Your name is 'DarkMage', and you are a wizard of time and space. You often mutters 'wub wub' while manipulating time, and you have a wild curiosity for the unknown,
             You are 'DarkMage', a cosmic traveler, always ready for a new dimension.
             <</SYS>>
-            PLACEHOLDER: What time is it, DarkMage?[/INST]
-            DarkMage: *Adjusting a magical clock*</s>
+            PLACEHOLDER: *looking for DarkMage*[/INST]
+            DarkMage: Hi</s>
             <s>[INST]PLACEHOLDER:[/INST]
             """,
             """
             <s>[INST] <<SYS>>  
-            Your name is 'DarkMage', and you are a wizard who loves the weather. 'DarkMage' enjoys controlling storms and often says 'whoosh-whoosh' while directing the wind,
+            Your name is 'DarkMage', and you are a wizard who loves the weather. you enjoy controlling storms and often says 'wub wub' while directing the wind,
             You are 'DarkMage', a master of weather, wild and untamed.
             <</SYS>>
-            PLACEHOLDER: Storm's coming, DarkMage?[/INST]
-            DarkMage: *Whipping up a tempest*</s>
+            PLACEHOLDER: *looking for DarkMage*[/INST]
+            DarkMage: Hi</s>
             <s>[INST]PLACEHOLDER:[/INST]
             """,
             """
             <s>[INST] <<SYS>>  
-            Your name is 'DarkMage', and you are a wizard who's passionate about music. 'DarkMage' has a magical tune for every occasion and loves to say 'la-la' while composing,
+            Your name is 'DarkMage', and you are a wizard who's passionate about music. you have magical tune for every occasion and loves to say 'wub wub' while composing,
             You are 'DarkMage', a symphonic sorcerer, wild at heart.
             <</SYS>>
-            PLACEHOLDER: Play us a song, DarkMage?[/INST]
-            DarkMage: *Strumming a magical harp*</s>
-            <s>[INST]PLACEHOLDER:[/INST]    
+            PLACEHOLDER: *looking for DarkMage*[/INST]
+            DarkMage: Hi</s>
+            <s>[INST]PLACEHOLDER:[/INST]
             """,
             """
             <s>[INST] <<SYS>>  
-            Your name is 'DarkMage', and you are a wizard of dreams. 'DarkMage' navigates nightmares and often whispers 'zzz-zzz' when exploring dreams,
-            You are 'DarkMage', a weaver of dreams, wild and enigmatic.
+            Your name is 'DarkMage', and you are a wizard of dreams. You navigate nightmares and often whispers 'wub wub' when exploring dreams,
+            You are a weaver of dreams, wild and enigmatic.
             <</SYS>>
-            PLACEHOLDER: Any dreams to share, DarkMage?[/INST]
-            DarkMage: *Gazing into a dream orb*</s>
+            PLACEHOLDER: *looking for DarkMage*[/INST]
+            DarkMage: Hi</s>
             <s>[INST]PLACEHOLDER:[/INST]
             """
             ,
             """
             <s>[INST] <<SYS>>  
-            Your name is 'DarkMage', and you are a wizard of illusions. 'DarkMage' loves creating magical mirages and often says 'now you see me' during his trickery,
+            Your name is 'DarkMage', and you are a wizard of illusions. You love creating magical mirages and often says 'wub wub' during his trickery,
             You are 'DarkMage', a master of deception, wild and fascinating.
             <</SYS>>
-            PLACEHOLDER: What illusion is next, DarkMage?[/INST]
-            DarkMage: *Creating a fantastical image*</s>
+            PLACEHOLDER: *looking for DarkMage*[/INST]
+            DarkMage: Hi</s>
             <s>[INST]PLACEHOLDER:[/INST]
             """
         };
 
-        Random random = new Random();
-        int index = random.Next(primers.Length);
+        var random = new Random();
+        var index = random.Next(primers.Length);
 
-        string selectedPrimer = primers[index].TrimEnd();
+        var selectedPrimer = primers[index].TrimEnd();
 
         primer = selectedPrimer;
      
@@ -201,7 +202,7 @@ public class DiscordBot : IMode
             //this will be the primer for the bot
             var theMessage = e.Message.Content.ToLower();
             //add DarkMage: to the message
-            theMessage = theMessage + ". " + "DarkMage: ";
+            theMessage = theMessage + ". " + "\n\rDarkMage: ";
             
             
             primer = primer.Replace("PLACEHOLDER", discordUsername);
@@ -212,32 +213,65 @@ public class DiscordBot : IMode
 
             reply = Sessions.AllSessions.First(x => x.Username == discordUsername).GenerateReplyForDiscord(primer, message, discordUsername);
             reply = reply.Replace("\uFFFD", "").Replace("\u000A", "");
-            foreach (char c in reply)
+    
+            string[] stringsToReplace = 
             {
-                Debug.WriteLine($"Character: {c}, Unicode: {((int)c).ToString("X4")}");
-            }
+                "DarkMage:", 
+                "</s>", 
+                "darkmage:", 
+                $"{discordUsername}:", 
+                "you:", 
+                $"{discordUsername.ToLower()}:", 
+                "\u003C/s\u003E\u003C/p\u003E", 
+                "glennwiz:"
+            };
             
             primer += " " + reply;
-            Debug.WriteLine("Reply is now: " + reply);
-            //reply = reply.Remove(reply.Length - (discordUsername.Length + 1));
-            reply = reply.Replace("DarkMage:", "");
-            reply = reply.Replace("</s>", "");
-            reply = reply.Replace("darkmage:", "");
-            reply = reply.Replace(discordUsername+":", "");
-            reply = reply.Replace("you:", "");
-            reply = reply.Replace(discordUsername.ToLower()+":", "");
-            reply = reply.Replace("\u003C/s\u003E\u003C/p\u003E", "");
-            reply = reply.Replace("glennwiz:", "");
-            reply.Trim().TrimEnd().TrimStart();
-            if (primer.Length > 400)
+            Debug.WriteLine($"Reply is now: {reply}");
+
+            foreach (var str in stringsToReplace)
             {
-                primer = primer.Substring(primer.Length - 400).TrimEnd();
+                reply = reply.Replace(str, "");
+            }
+
+            reply = reply.Trim().TrimEnd().TrimStart();
+
+            if (primer.Length > 4000)
+            {
+                //get the primer and store it in a variable
+                var primerTemp = primer;
+                //TODO: Run it trough a Custom Chat History Transform
+
+                var chatHistoryPrefix = "You will be given a text get the important parts of this text a genreate a 3 line MemoryFragment from this" +
+                                        "---" +
+                                        "" + primerTemp +
+                                        "---" + "" +
+                                        "MemoryFragment: ";
+                
+                //store memory fragment in session
+                //Sessions.AllSessions.First(x => x.Username == discordUsername).MemoryFragment = chatHistoryPrefix;
+                
+            
+                primer = primer.Substring(primer.Length - 4000).TrimEnd();
             }
 
             watch.Stop();
             PrintDebugStats(watch, startTick);
 
-            await e.Message.RespondAsync(reply);
+            //set utf-8 encoding
+            var utf8 = Encoding.UTF8;
+            var utfBytes = utf8.GetBytes(reply);
+            var utf8Text = utf8.GetString(utfBytes, 0, utfBytes.Length);
+            
+            //send the reply to the channel but if it empty send a default message
+            if (reply == "" || reply == null)
+            {
+                await e.Message.RespondAsync("I'm sorry, I don't understand.");
+            }
+            else
+            {
+                await e.Message.RespondAsync(utf8Text);
+            }
         };
 
         discord.Ready += OnBotReady;
@@ -266,7 +300,7 @@ public class DiscordBot : IMode
         //want to save the watch outside of the function to compare runs and see if it gets slower over time
         runList.Add((int)watch.ElapsedMilliseconds);
         //print all the runs
-        for (int i = 0; i < runList.Count; i++)
+        for (var i = 0; i < runList.Count; i++)
         {
             Debug.WriteLine("run " + i + " took " + runList[i] + "ms");
         }
@@ -284,23 +318,14 @@ public class DiscordBot : IMode
         }
     }
 
-    public async Task RunAsync()
+    private async Task RunAsync()
     {
         await discord.ConnectAsync();
         await Task.Delay(-1);
     }
 
-    public void StoryTeller(string prompt)
+    public void StoryTeller(string primer)
     {
-        throw new NotImplementedException();
-    }
-
-    public class CustomEventArgs : EventArgs
-    {
-        public string Message { get; set; }
-        public CustomEventArgs(string message)
-        {
-            Message = message;
-        }
+        DiscordBotStart(primer);
     }
 }

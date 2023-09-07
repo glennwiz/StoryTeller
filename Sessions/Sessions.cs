@@ -44,13 +44,27 @@ public class Sessions
         running = true;
         var reply = "";
 
-        var chat = ChatSession?.Chat(primer, new InferenceParams()
+        IEnumerable<string>? chat = ChatSession?.Chat(primer, new InferenceParams()
         {
-            MaxTokens = 200, 
+            MaxTokens = -1, 
             PathSession = @"c:\dev\LLMs\",
-            Temperature = 0.9f, 
-            TopK = 100,
-            FrequencyPenalty = 0.9f,
+            Temperature = 0.9f, /*The temperature controls the degree of randomness in token selection. 
+            The temperature is used for sampling during response generation, which occurs when topP and topK are applied. 
+            Lower temperatures are good for prompts that require a more deterministic/less open-ended response, while higher temperatures can lead to more diverse or creative results. 
+            A temperature of 0 is deterministic, meaning that the highest probability response is always selected.*/
+            
+            TopK = 100, /* The topK parameter changes how the model selects tokens for output. 
+            A topK of 1 means the selected token is the most probable among all the tokens in the model’s vocabulary (also called greedy decoding),
+            while a topK of 3 means that the next token is selected from among the 3 most probable using the temperature. 
+            For each token selection step, the topK tokens with the highest probabilities are sampled. 
+            Tokens are then further filtered based on topP with the final token selected using temperature sampling.*/
+            
+            TopP = 0.9f, /* The topP parameter changes how the model selects tokens for output. 
+            Tokens are selected from the most to least probable until the sum of their probabilities equals the topP value. 
+            For example, if tokens A, B, and C have a probability of 0.3, 0.2, and 0.1 and the topP value is 0.5, 
+            then the model will select either A or B as the next token by using the temperature and exclude C as a candidate. 
+            The default topP value is 0.95.*/
+            FrequencyPenalty = -1.2f, /*Negative values can be used to increase the likelihood of repetition.*/
             AntiPrompts = new List<string>
             {
                 discordUsername + ":",
@@ -59,16 +73,16 @@ public class Sessions
                 "\n"+discordUsername+":", 
                 "\n*"+discordUsername, 
                 "\n\r\n\r\n\r",
-                "\u003C/s\u003E\u003C/p\u003E\n\n"
+                "\u003C/s\u003E\u003C/p\u003E\n\n",
             }
         });
         
         foreach (var text in chat)
         {
             //set utf-8 encoding
-            Encoding utf8 = Encoding.UTF8;
-            byte[] utfBytes = utf8.GetBytes(text);
-            string utf8Text = utf8.GetString(utfBytes, 0, utfBytes.Length);
+            var utf8 = Encoding.UTF8;
+            var utfBytes = utf8.GetBytes(text);
+            var utf8Text = utf8.GetString(utfBytes, 0, utfBytes.Length);
             
             reply += utf8Text.ToLower();
             Console.Write(text);
@@ -83,24 +97,24 @@ public class Sessions
     public void SaveSession()
     {
         var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Sessions", $"{this.Username}.json");
-        string jsonContent = JsonConvert.SerializeObject(this);
+        var jsonContent = JsonConvert.SerializeObject(this);
         File.WriteAllText(path, jsonContent);
     }
 
     public static ChatSession CreateSession(string prompt, string modelPath)
     {
-        DateTime dateTimeForSeed = DateTime.Now;
-        long seed = dateTimeForSeed.Ticks;
+        var dateTimeForSeed = DateTime.Now;
+        var seed = dateTimeForSeed.Ticks;
 
-        Random random = new Random((int)seed);
+        var random = new Random((int)seed);
         var seeNext = random.Next();
 
         var ex = new InteractiveExecutor(
             new LLamaModel(new ModelParams(modelPath, contextSize: 2048 *2, seed: seeNext, gpuLayerCount: 5)));
         var chatSession = new ChatSession(ex);
         ChatSession = chatSession;
-
-        Console.WriteLine();
+        
+        Console.WriteLine("Loading model...");
 
         //Write the primer
         Console.Write(prompt);
@@ -111,22 +125,19 @@ public class Sessions
     {
         if (mode == Mode.StoryTeller)
         {
-            botMode?.StoryTeller(prompt);
+            botMode!.StoryTeller(prompt);
         }
         else if (mode == Mode.ChatBot)
         {
-            ChatBot.Chat(prompt);
+            botMode!.StoryTeller(prompt);
         }
         else if (mode == Mode.DiscordBot)
         {
-            var se = new Sessions("DarkMage");
-            //start on own thread
-            DiscordBot? discordBot3 = botMode as DiscordBot;
-            discordBot3!.DiscordBotStart(primer);
+            botMode!.StoryTeller(primer);
         }
         else if (mode == Mode.LoopbackBot)
         {
-            botMode?.StoryTeller(prompt);
+            botMode!.StoryTeller(prompt);
         }
     }
 }

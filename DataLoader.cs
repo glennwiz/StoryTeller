@@ -8,7 +8,7 @@ namespace StoryTeller
         {
             try
             {
-                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "json", filename);
+                var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "json", filename);
 
                 var jsonContent = File.ReadAllText(path);
 

@@ -14,11 +14,10 @@ namespace Logging
 
         public void LogMessage(string message, LogLevel logLevel = LogLevel.Information)
         {
-            bool running = true; //TODO; make config parameter
+            var running = true; //TODO; make config parameter
             if (running)
             {
-                if(message == null || //whitespace is not allowed
-                   message == string.Empty)
+                if(message is null or "")
                 {
                     message = "null";
                 }
@@ -30,7 +29,7 @@ namespace Logging
                 var logFileName = $"log{DateTime.Now:yyyyMMdd}.json";
                 var logFilePath = Path.Combine(_logFolderPath, logFileName);
 
-                List<LogEntry> logEntries;
+                List<LogEntry>? logEntries;
                 if (File.Exists(logFilePath))
                 {
                     var existingContent = File.ReadAllText(logFilePath);

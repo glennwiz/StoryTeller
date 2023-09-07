@@ -35,7 +35,7 @@ public class StoryTellerBot : IMode
             Sessions.LoggingService.LogMessage("Generated Primer: " + primer);
             Console.WriteLine("Do you want to use this Primer[y/n]:");
             
-            string response = Console.ReadLine();
+            var response = Console.ReadLine();
             
             if (response.Equals("y", StringComparison.OrdinalIgnoreCase))
             {
