@@ -349,7 +349,10 @@ public class Templates
         Console.Write(prompt);
 
         var inferenceParams = new InferenceParams()
-            {Temperature = 0.6f, AntiPrompts = new List<string> {"User:"}, MaxTokens = 128};
+        {
+            Temperature = 0.6f, 
+            AntiPrompts = new List<string> {"User:"}
+        };
 
         while (true)
         {
@@ -366,7 +369,7 @@ public class Templates
 
     public static async void TalkToYourself()
     {
-        var modelPath = @"C:\dev\LLMs\llama-2-7b.Q2_K.gguf";
+        var modelPath = @"C:\dev\LLMs\pygmalion-2-13b.Q2_K.gguf";
 
         // Load weights into memory
         var @params = new ModelParams(modelPath)
