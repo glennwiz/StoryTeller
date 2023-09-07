@@ -10,8 +10,8 @@
 
   <ItemGroup>
     <PackageReference Include="DSharpPlus" Version="4.4.2" />
-    <PackageReference Include="LLamaSharp" Version="0.4.2-preview" />
-    <PackageReference Include="LLamaSharp.Backend.Cpu" Version="0.4.2-preview" />
+    <PackageReference Include="LLamaSharp" Version="0.5.1" />
+    <PackageReference Include="LLamaSharp.Backend.Cpu" Version="0.5.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
@@ -53,6 +53,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
 
 
 

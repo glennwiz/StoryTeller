@@ -7,8 +7,8 @@ public class Program
     public static void Main()
     {
         var logger = new LoggerService(@"c:\temp\");
-        Sessions.LoggingService = logger;
-        Sessions.LoggingService.LogMessage("Program started.");
+        Session.LoggingService = logger;
+        Session.LoggingService.LogMessage("Program started.");
 
         IMode? botMode = null;
         var primer = "default";
@@ -57,14 +57,11 @@ public class Program
             }
         }
 
-        var modelPath = @"C:\dev\LLMs\llama-2-7b-chat.ggmlv3.q4_0.bin";
-        //var modelPath = @"C:\dev\LLMs\Wizard-Vicuna-7B-Uncensored.ggmlv3.q2_K.bin";
-
         var prompt = primer;
 
-        var session = Sessions.CreateSession(prompt, modelPath);
+        Session.CreateSession(prompt);
 
-        Sessions.ModeStart(botMode, primer, mode, prompt);
+        Session.ModeStart(botMode, mode, prompt);
 
         void WriteTheSelectionMenu()
         {

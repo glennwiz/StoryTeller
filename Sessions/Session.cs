@@ -6,10 +6,10 @@ using Newtonsoft.Json;
 using StoryTeller.BotModes;
 
 namespace StoryTeller;
-public class Sessions
+public class Session
 {
     [JsonIgnore]
-    public static List<Sessions> AllSessions { get; } = new List<Sessions>();
+    public static List<Session> AllSessions { get; } = new List<Session>();
     [JsonIgnore]
     public static ChatSession? ChatSession { get; set; }
     [JsonIgnore]
@@ -20,7 +20,7 @@ public class Sessions
     public string Username { get; set; }
     public Dictionary<string, string> Prompts { get; set; } = new Dictionary<string, string>();
 
-    public Sessions(string username)
+    public Session(string username)
     {
         Username = username;
         AllSessions.Add(this);
@@ -101,16 +101,28 @@ public class Sessions
         File.WriteAllText(path, jsonContent);
     }
 
-    public static ChatSession CreateSession(string prompt, string modelPath)
+    public static void CreateSession(string prompt)
     {
-        var dateTimeForSeed = DateTime.Now;
-        var seed = dateTimeForSeed.Ticks;
+        var seed = RandomGenHelper.GenerateRandomNumber();
+        
+        var modelPath = @"c:\dev\LLMs\pygmalion-2-13b.Q2_K.gguf";
 
-        var random = new Random((int)seed);
-        var seeNext = random.Next();
-
-        var ex = new InteractiveExecutor(
-            new LLamaModel(new ModelParams(modelPath, contextSize: 2048 *2, seed: seeNext, gpuLayerCount: 5)));
+        //1create a new model params object
+        var @params = new ModelParams(modelPath)
+        {
+            ContextSize = 4096,
+            Seed = seed,
+            GpuLayerCount = 5
+        };
+        
+        //2load the model weights
+        var weights = LLamaWeights.LoadFromFile(@params);
+        
+        //3create a new context
+        var context = weights.CreateContext(@params);
+        
+        //4initialize the context with the weights
+        var ex = new InteractiveExecutor(context);
         var chatSession = new ChatSession(ex);
         ChatSession = chatSession;
         
@@ -118,10 +130,9 @@ public class Sessions
 
         //Write the primer
         Console.Write(prompt);
-        return chatSession;
     }
 
-    public static void ModeStart(IMode? botMode, string primer, Mode mode, string prompt)
+    public static void ModeStart(IMode? botMode, Mode mode, string prompt)
     {
         if (mode == Mode.StoryTeller)
         {
@@ -133,7 +144,7 @@ public class Sessions
         }
         else if (mode == Mode.DiscordBot)
         {
-            botMode!.StoryTeller(primer);
+            botMode!.StoryTeller(prompt);
         }
         else if (mode == Mode.LoopbackBot)
         {

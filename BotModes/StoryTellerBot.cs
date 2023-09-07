@@ -11,13 +11,13 @@ public class StoryTellerBot : IMode
         while (s != "stop")
         {
             stringToPrint = "";
-            foreach (var text in Sessions.ChatSession.Chat(s,
+            foreach (var text in Session.ChatSession.Chat(s,
                          new InferenceParams() { Temperature = 0.8f, AntiPrompts = new List<string> { "." } }))
             {
                 Console.Write(text);
                 stringToPrint += text;
             }
-            Sessions.LoggingService.LogMessage(stringToPrint);
+            Session.LoggingService.LogMessage(stringToPrint);
             s = " ";
         }
     }
@@ -32,14 +32,14 @@ public class StoryTellerBot : IMode
         {
             primer = GetPrimer();
             Console.WriteLine("Generated Primer: " + primer);
-            Sessions.LoggingService.LogMessage("Generated Primer: " + primer);
+            Session.LoggingService.LogMessage("Generated Primer: " + primer);
             Console.WriteLine("Do you want to use this Primer[y/n]:");
             
             var response = Console.ReadLine();
             
             if (response.Equals("y", StringComparison.OrdinalIgnoreCase))
             {
-                Sessions.LoggingService.LogMessage("Chosen Primer: " + primer);
+                Session.LoggingService.LogMessage("Chosen Primer: " + primer);
                 mode = Mode.StoryTeller;
                 break;
             }
