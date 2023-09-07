@@ -166,8 +166,6 @@ public class DiscordBot : IMode
 
         discord.MessageCreated += async (s, e) =>
         {
-            var watch = Stopwatch(e, out var startTick);
-
             if (e.Message.Author.IsBot)
             {
                 return;
@@ -179,34 +177,34 @@ public class DiscordBot : IMode
             {
                 //discordUsername = "White Mage";
             }
-          
-            if (Sessions.AllSessions.Any(x => x.Username == discordUsername))
+
+            Session? session = null;
+            
+            if (Session.AllSessions.Any(x => x.Username == discordUsername))
             {
-                var session = Sessions.AllSessions.First(x => x.Username == discordUsername);
+                session = Session.AllSessions.First(x => x.Username == discordUsername);
             }
             else
             {
-                Sessions.AllSessions.Add(new Sessions(discordUsername));
+                session = new Session(discordUsername);
+                Session.AllSessions.Add(session);
             }
             
             await e.Message.Channel.TriggerTypingAsync(); 
             var message = e.Message.Content;
 
             primer = Primer(primer, e, discordUsername);
-
-            var reply = Sessions.AllSessions.First(x => x.Username == discordUsername).GenerateReplyForDiscord(primer, message, discordUsername);
-            reply = Reply(reply);
+            var reply = session!.GenerateReplyForDiscord(primer, message, discordUsername);
+            reply = RemoveSpecialCharacters(reply);
     
-            var stringsToReplace = StringsToReplace(discordUsername);
-            
             primer += " " + reply;
        
-            foreach (var str in stringsToReplace)
+            foreach (var str in StringsToReplace(discordUsername))
             {
                 reply = reply.Replace(str, "");
             }
 
-            reply = reply.Trim().TrimEnd().TrimStart();
+            reply = reply.Trim();
 
             if (primer.Length > 4000)
             {
@@ -248,7 +246,7 @@ public class DiscordBot : IMode
         RunAsync().GetAwaiter().GetResult(); //Can we use await here?
     }
 
-    private static string Reply(string reply)
+    private static string RemoveSpecialCharacters(string reply)
     {
         reply = reply.Replace("\uFFFD", "").Replace("\u000A", "");
         return reply;
@@ -272,40 +270,18 @@ public class DiscordBot : IMode
 
     private static string Primer(string primer, MessageCreateEventArgs e, string discordUsername)
     {
-        var builder = new StringBuilder();
         var theMessage = e.Message.Content.ToLower() + ". \n\rDarkMage: ";
         primer = primer.Replace("PLACEHOLDER", discordUsername);
-        builder.Append(primer);
-        builder.Append(" ");
-        builder.Append(theMessage);
-        builder.Append("\r\n");
-        primer = builder.ToString();
-        return primer;
+    
+        var builder = new StringBuilder();
+        builder.Append(primer)
+            .Append(' ')
+            .Append(theMessage)
+            .Append("\r\n");
+    
+        return builder.ToString();
     }
-
-    private static Stopwatch Stopwatch(MessageCreateEventArgs e, out long startTick)
-    {
-        Debug.WriteLine("-> | message | " + e.Message.Content);
-        var watch = System.Diagnostics.Stopwatch.StartNew();
-        startTick = watch.ElapsedTicks;
-        Debug.WriteLine("StartTick: " + startTick);
-        return watch;
-    }
-
-    private void PrintDebugStats(Stopwatch watch, long startTick)
-    {
-        var endTick = watch.ElapsedTicks;
-        Debug.WriteLine("EndTick: " + endTick);
-        Debug.WriteLine("Ticks: " + (endTick - startTick));
-        Debug.WriteLine("Milliseconds: " + watch.ElapsedMilliseconds);
-        Debug.WriteLine("Seconds: " + watch.Elapsed.Seconds);
-        Debug.WriteLine("Minutes: " + watch.Elapsed.Minutes);
-
-        //want to save the watch outside of the function to compare runs and see if it gets slower over time
-        runList.Add((int)watch.ElapsedMilliseconds);
-
-    }
-
+   
     private async Task OnBotReady(DiscordClient sender, ReadyEventArgs args)
     {
         var members = await discord.GetGuildAsync(348778629829885953); // Replace with Discord server ID

@@ -23,7 +23,7 @@ public class ChatBot : IMode
     {
         while (true)
         {
-            foreach (var text in Sessions.ChatSession.Chat(prompt,
+            foreach (var text in Session.ChatSession.Chat(prompt,
                          new InferenceParams() { Temperature = 0.6f, AntiPrompts = new List<string> { "Developer1:" } }))
             {
                 Console.Write(text);

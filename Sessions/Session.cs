@@ -6,10 +6,10 @@ using Newtonsoft.Json;
 using StoryTeller.BotModes;
 
 namespace StoryTeller;
-public class Sessions
+public class Session
 {
     [JsonIgnore]
-    public static List<Sessions> AllSessions { get; } = new List<Sessions>();
+    public static List<Session> AllSessions { get; } = new List<Session>();
     [JsonIgnore]
     public static ChatSession? ChatSession { get; set; }
     [JsonIgnore]
@@ -20,7 +20,7 @@ public class Sessions
     public string Username { get; set; }
     public Dictionary<string, string> Prompts { get; set; } = new Dictionary<string, string>();
 
-    public Sessions(string username)
+    public Session(string username)
     {
         Username = username;
         AllSessions.Add(this);

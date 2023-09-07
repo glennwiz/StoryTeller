@@ -156,7 +156,7 @@ public class LoopbackBot : IMode
         {
             stringToPrint = "";
 
-            var chat = Sessions.ChatSession?.Chat(prompt,
+            var chat = Session.ChatSession?.Chat(prompt,
                 new InferenceParams() {Temperature = 0.95f, AntiPrompts = new List<string> {"\r\n Alien:"}});
             
             foreach (var text in chat)
@@ -165,7 +165,7 @@ public class LoopbackBot : IMode
                 Console.Write(cleanedText);
                 stringToPrint += cleanedText;
             }
-            Sessions.LoggingService.LogMessage(stringToPrint);
+            Session.LoggingService.LogMessage(stringToPrint);
             var reply = "";
             hitCounter++;
             if (hitCounter % 2 == 0)

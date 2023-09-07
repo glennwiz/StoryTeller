@@ -7,8 +7,8 @@ public class Program
     public static void Main()
     {
         var logger = new LoggerService(@"c:\temp\");
-        Sessions.LoggingService = logger;
-        Sessions.LoggingService.LogMessage("Program started.");
+        Session.LoggingService = logger;
+        Session.LoggingService.LogMessage("Program started.");
 
         IMode? botMode = null;
         var primer = "default";
@@ -59,9 +59,9 @@ public class Program
 
         var prompt = primer;
 
-        Sessions.CreateSession(prompt);
+        Session.CreateSession(prompt);
 
-        Sessions.ModeStart(botMode, mode, prompt);
+        Session.ModeStart(botMode, mode, prompt);
 
         void WriteTheSelectionMenu()
         {
