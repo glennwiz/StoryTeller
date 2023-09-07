@@ -7,7 +7,6 @@ namespace StoryTeller.BotModes;
 
 public class DiscordBot : IMode
 {
-    List<int> runList = new List<int>();
     private DiscordClient discord;
 
     public static string DiscordPrimer(out Mode mode)
@@ -20,13 +19,13 @@ public class DiscordBot : IMode
                   $"DarkMage dont know the gender of PLACEHOLDER, but he is always helpful <</SYS>>\r\n\r\n" +
                   $"PLACEHOLDER: Hi there DarkMage \r\n" +
                   $"DarkMage: *is in s good mood today, he stands with his back to you, and working on a secret* Hello there PLACEHOLDER *in Happy tone*, what a magical day.\r\n\r\n" +
-                  $"PLACEHOLDER: [/INST]";
+                  $"PLACEHOLDER: ";
         
         // primer = $"<s>[INST] <<SYS>> In the shadows, between the known and unknown, PLACEHOLDER meets a wizard known only as DarkMage. " +
         //                   $"The wizard speaks in enigmas, enjoys a twisted laugh, and never reveals his true intentions. " +
         //                   $"PLACEHOLDER's identity remains a mystery. <<SYS>>\r\n\r\n" +
         //                   $"PLACEHOLDER: Are you there, DarkMage?\r\nDarkMage: *turns slowly, eyes gleaming* Welcome, PLACEHOLDER, to a place where magic and mystery intertwine.\r\n\r\n" +
-        //                   $"PLACEHOLDER: [/INST]";
+        //                   $"PLACEHOLDER: ";
         
         string[] primers = {
             // """
@@ -36,7 +35,7 @@ public class DiscordBot : IMode
             // DarkMage dont know the gender of PLACEHOLDER, but he is always helpful <</SYS>>
             // PLACEHOLDER: Hi there DarkMage[/INST]
             // DarkMage: *is in s good mood today, he stands with his back to you, and working on a secret* Hello there PLACEHOLDER *in Happy tone*, what a magical day.</s>
-            // <s>[INST]PLACEHOLDER: [/INST]
+            // <s>[INST]PLACEHOLDER: 
             // """, 
             """
             <s>[INST] <<SYS>>  
@@ -45,9 +44,9 @@ public class DiscordBot : IMode
             you are a master spellcaster, and you are a master dancer,
             You are 'DarkMage' a bit of a loner, but you are always helpful.
             <</SYS>>
-            PLACEHOLDER: *looking for DarkMage*[/INST]
-            DarkMage: Hi</s>
-            <s>[INST]PLACEHOLDER:[/INST]
+            PLACEHOLDER: *looking for DarkMage* [/INST]
+            DarkMage: Hi </s>
+            <s>[INST]PLACEHOLDER: 
             """, 
             """
             <s>[INST] <<SYS>>  
@@ -56,8 +55,8 @@ public class DiscordBot : IMode
             You are 'DarkMage', a wizard who's as much of a mystery as a friend.
             <</SYS>>
             PLACEHOLDER: *looking for DarkMage*[/INST]
-            DarkMage: Hi</s>
-            <s>[INST]PLACEHOLDER:[/INST]
+            DarkMage: Hi </s>
+            <s>[INST]PLACEHOLDER: 
             """,
             """
             <s>[INST] <<SYS>>  
@@ -66,8 +65,8 @@ public class DiscordBot : IMode
             You are 'DarkMage', always ready for a magical adventure.
             <</SYS>>
             PLACEHOLDER: *looking for DarkMage*[/INST]
-            DarkMage: Hi</s>
-            <s>[INST]PLACEHOLDER:[/INST]
+            DarkMage: Hi </s>
+            <s>[INST]PLACEHOLDER: 
             """,
             """
             <s>[INST] <<SYS>>  
@@ -75,8 +74,8 @@ public class DiscordBot : IMode
             You are 'DarkMage', an unapologetic trickster, always ready for fun.
             <</SYS>>
             PLACEHOLDER: *looking for DarkMage*[/INST]
-            DarkMage: Hi</s>
-            <s>[INST]PLACEHOLDER:[/INST]
+            DarkMage: Hi </s>
+            <s>[INST]PLACEHOLDER: 
             """
             ,
             """
@@ -85,8 +84,8 @@ public class DiscordBot : IMode
             You are 'DarkMage', you are a friend to all creatures, wild and tame.
             <</SYS>>
             PLACEHOLDER: *looking for DarkMage*[/INST]
-            DarkMage: Hi</s>
-            <s>[INST]PLACEHOLDER:[/INST]
+            DarkMage: Hi </s>
+            <s>[INST]PLACEHOLDER: 
             """
             ,
             """
@@ -95,8 +94,8 @@ public class DiscordBot : IMode
             You are 'DarkMage', a cosmic traveler, always ready for a new dimension.
             <</SYS>>
             PLACEHOLDER: *looking for DarkMage*[/INST]
-            DarkMage: Hi</s>
-            <s>[INST]PLACEHOLDER:[/INST]
+            DarkMage: Hi </s>
+            <s>[INST]PLACEHOLDER: 
             """,
             """
             <s>[INST] <<SYS>>  
@@ -104,8 +103,8 @@ public class DiscordBot : IMode
             You are 'DarkMage', a master of weather, wild and untamed.
             <</SYS>>
             PLACEHOLDER: *looking for DarkMage*[/INST]
-            DarkMage: Hi</s>
-            <s>[INST]PLACEHOLDER:[/INST]
+            DarkMage: Hi </s>
+            <s>[INST]PLACEHOLDER: 
             """,
             """
             <s>[INST] <<SYS>>  
@@ -113,8 +112,8 @@ public class DiscordBot : IMode
             You are 'DarkMage', a symphonic sorcerer, wild at heart.
             <</SYS>>
             PLACEHOLDER: *looking for DarkMage*[/INST]
-            DarkMage: Hi</s>
-            <s>[INST]PLACEHOLDER:[/INST]
+            DarkMage: Hi </s>
+            <s>[INST]PLACEHOLDER: 
             """,
             """
             <s>[INST] <<SYS>>  
@@ -122,8 +121,8 @@ public class DiscordBot : IMode
             You are a weaver of dreams, wild and enigmatic.
             <</SYS>>
             PLACEHOLDER: *looking for DarkMage*[/INST]
-            DarkMage: Hi</s>
-            <s>[INST]PLACEHOLDER:[/INST]
+            DarkMage: Hi </s>
+            <s>[INST]PLACEHOLDER: 
             """
             ,
             """
@@ -132,8 +131,8 @@ public class DiscordBot : IMode
             You are 'DarkMage', a master of deception, wild and fascinating.
             <</SYS>>
             PLACEHOLDER: *looking for DarkMage*[/INST]
-            DarkMage: Hi</s>
-            <s>[INST]PLACEHOLDER:[/INST]
+            DarkMage: Hi </s>
+            <s>[INST]PLACEHOLDER: 
             """
         };
 
@@ -148,16 +147,11 @@ public class DiscordBot : IMode
         return primer;
     }
 
-    public DiscordBot()
-    {
-        Debug.WriteLine("DiscordBot.cs: DiscordBot()");
-    }
-
-    public async void DiscordBotStart(string primer)
+    public void DiscordBotStart(string primer)
     {
         var token = File.ReadAllText("token.txt");
 
-        discord = new DiscordClient(new DiscordConfiguration()
+        discord = new DiscordClient(new DiscordConfiguration
         {
             Token = token,
             TokenType = TokenType.Bot,
@@ -193,7 +187,7 @@ public class DiscordBot : IMode
             await e.Message.Channel.TriggerTypingAsync(); 
             var message = e.Message.Content;
 
-            primer = Primer(primer, e, discordUsername);
+            primer = ConstructUserMessage(primer, e, discordUsername);
             var reply = session!.GenerateReplyForDiscord(primer, message, discordUsername);
             reply = RemoveSpecialCharacters(reply);
     
@@ -231,7 +225,7 @@ public class DiscordBot : IMode
             var utf8Text = utf8.GetString(utfBytes, 0, utfBytes.Length);
             
             //send the reply to the channel but if it empty send a default message
-            if (reply == "" || reply == null)
+            if (reply is "" or null)
             {
                 await e.Message.RespondAsync("I'm sorry, I don't understand.");
             }
@@ -258,6 +252,7 @@ public class DiscordBot : IMode
         {
             "DarkMage:",
             "</s>",
+            "</s>",
             "darkmage:",
             $"{discordUsername}:",
             "you:",
@@ -268,9 +263,9 @@ public class DiscordBot : IMode
         return stringsToReplace;
     }
 
-    private static string Primer(string primer, MessageCreateEventArgs e, string discordUsername)
+    private static string ConstructUserMessage(string primer, MessageCreateEventArgs e, string discordUsername)
     {
-        var theMessage = e.Message.Content.ToLower() + ". \n\rDarkMage: ";
+        var theMessage = e.Message.Content.ToLower() + ". [/INST]\n\rDarkMage: ";
         primer = primer.Replace("PLACEHOLDER", discordUsername);
     
         var builder = new StringBuilder();
@@ -285,7 +280,7 @@ public class DiscordBot : IMode
     private async Task OnBotReady(DiscordClient sender, ReadyEventArgs args)
     {
         var members = await discord.GetGuildAsync(348778629829885953); // Replace with Discord server ID
-        var member = members.Members.FirstOrDefault(m => m.Value.Username == "glennwiz").Value;
+        var member = members.Members.FirstOrDefault(m => m.Value.Username == "Glennwiz").Value;
 
         if (member != null)
         {

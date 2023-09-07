@@ -64,9 +64,10 @@ public class Session
             For example, if tokens A, B, and C have a probability of 0.3, 0.2, and 0.1 and the topP value is 0.5, 
             then the model will select either A or B as the next token by using the temperature and exclude C as a candidate. 
             The default topP value is 0.95.*/
-            FrequencyPenalty = -1.2f, /*Negative values can be used to increase the likelihood of repetition.*/
+            FrequencyPenalty = 0.9f, /*Negative values can be used to increase the likelihood of repetition.*/
             AntiPrompts = new List<string>
             {
+                "</s>",
                 discordUsername + ":",
                 "\u003C/s\u003E", 
                 "\n#",
@@ -105,7 +106,7 @@ public class Session
     {
         var seed = RandomGenHelper.GenerateRandomNumber();
         
-        var modelPath = @"c:\dev\LLMs\pygmalion-2-13b.Q2_K.gguf";
+        var modelPath = @"c:\dev\LLMs\llama-2-13b-chat.Q4_K_S.gguf";
 
         //1create a new model params object
         var @params = new ModelParams(modelPath)
