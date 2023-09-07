@@ -101,16 +101,25 @@ public class Sessions
         File.WriteAllText(path, jsonContent);
     }
 
-    public static ChatSession CreateSession(string prompt, string modelPath)
+    public static ChatSession CreateSession(string prompt)
     {
         var dateTimeForSeed = DateTime.Now;
         var seed = dateTimeForSeed.Ticks;
 
         var random = new Random((int)seed);
         var seeNext = random.Next();
+        
+        var modelPath = @"c:\dev\LLMs\pygmalion-2-13b.Q2_K.gguf";
+        //var modelPath = @"C:\dev\LLMs\llama-2-7b-chat.ggmlv3.q4_0.bin";
+        //var modelPath = @"C:\dev\LLMs\Wizard-Vicuna-7B-Uncensored.ggmlv3.q2_K.bin";
 
         var ex = new InteractiveExecutor(
-            new LLamaModel(new ModelParams(modelPath, contextSize: 2048 *2, seed: seeNext, gpuLayerCount: 5)));
+            new LLamaContext(new ModelParams(modelPath)
+            {
+             ContextSize   = 2 * 2048,
+             Seed = seeNext,
+             GpuLayerCount = 5
+            }));
         var chatSession = new ChatSession(ex);
         ChatSession = chatSession;
         
