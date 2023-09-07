@@ -6,8 +6,10 @@ public class Program
     {
         //Sessions.GetEmbeddings();
         //Templates.InstructMode();
-        Templates.InteractionModeExecute();
+        //Templates.InteractionModeExecute();
         //Templates.SaveAndLoadSession();
         //Templates.TalkToYourself();
+        Templates.TalkToYourself2();
+        //Templates.LoadAnSaveState();
     }
 }
