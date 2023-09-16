@@ -12,7 +12,7 @@ namespace StoryTeller
 
                 var jsonContent = File.ReadAllText(path);
 
-                var x = JsonConvert.DeserializeObject<T>(jsonContent);
+                var  = JsonConvert.DeserializeObject<T>(jsonContent);
 
                 return x;
             }
