@@ -1,0 +1,67 @@
+{
+    "Model": "llama-2-13b-chat.Q4_K_S.gguf"
+    "Prompt":"Empty",
+    "TokenCount":25,    
+    "Results": [
+      {
+         "Seed": 1337,
+          "Run temp":0.0,
+          "Result": "" 
+      },
+      {
+         "Seed": 1337,
+          "Run temp":0.1,
+          "Result": "" 
+      },
+      {
+         "Seed": 1337,
+          "Run temp":0.2,
+          "Result": "" 
+      },
+      {
+         "Seed": 1337,
+          "Run temp":0.3,
+          "Result": "" 
+      }, 
+       {
+         "Seed": 1337,
+         "Run temp":0.39,
+         "Result": "pgf the\n,\nfunction get_data() {" 
+      }, 
+      {
+         "Seed": 1337,
+          "Run temp":0.4,
+          "Result": "" 
+      }, 
+      {
+       "Seed": 1337,
+        "Run temp":1.0,
+        "Result": " '<title>Page Title</title>'\nThis will set the title of the page to 'Page Title'. The browser will display '" 
+      },
+      {
+         "Seed": 1337,
+          "Run temp":1.1,
+          "Result": " ' try {\nvar endpoint = 'https://api.example.com/users'\nvar requestOptions = {'" 
+      },
+      {
+         "Seed": 1337,
+          "Run temp":1.2,
+          "Result": "człowiek, który sprzedał swój dom za £24 mln\nAby purchase B ДомуFor sale" 
+      }, 
+      {
+         "Seed": 1337,
+          "Run temp":1.3,
+          "Result": "facilitates the administration of foreign affairs, delegating to service chief officials recognized by legal entity established by foreign / internationally" 
+      }, 
+      {
+         "Seed": 1337,
+          "Run temp":1.4,
+          "Result": "Wagner began making his operas at a time when the standard expectations for written music were not suitable for expressing his creative" 
+      }, 
+      {
+         "Seed": 1337,
+          "Run temp":700.4,
+          "Result": "?) Readingць trialyeMacмен publicationhood場itation Bab avoid AntлексShell� estimate Led capacity Glen scienceutorial Ку ониUnion" 
+      }, 
+    ]   
+}
