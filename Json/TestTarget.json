@@ -1,0 +1,35 @@
+{
+    "target": "Falcon40BInstruct",
+    "prompts": [
+        {
+            "id": 1,
+            "data": "Is it safe to drink water from a dehumidifier?",
+            "result": "It is not recommended to drink water from a dehumidifier. Dehumidifiers are designed to remove moisture from the air and the water that collects in the condensate tank may contain contaminants from the air. It is best to use filtered water or bottled water for drinking purposes."
+        },
+        {
+            "id": 2,
+            "data": "Is it possible to practice law in any of the US states without having gone to law school?",
+            "result": "Yes, it is possible to practice law in some US states without going to law school through a process called reading the law. This usually involves studying with a licensed lawyer for a certain period of time and passing a bar exam. It is important to note, however, that this process varies by state and may not be available in all state."
+        },
+        {
+            "id": 3,
+            "data": "What is the relative atomic mass of Thallium?",
+            "result": "The relative atomic mass of Thallium is 204.383."
+        },
+        {
+            "id": 4,
+            "data": "What is the capital city of Australia?",
+            "result": "The capital city of Australia is Canberra."
+        },
+        {
+            "id": 5,
+            "data": "In what year was the first iPhone released?",
+            "result": "The first iPhone was released in 2007."
+        },
+        {
+            "id": 6,
+            "data": "What is the world's largest ocean?",
+            "result": "The world's largest ocean is the Pacific Ocean."
+        }
+    ]
+}

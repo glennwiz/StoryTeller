@@ -52,6 +52,7 @@
     <None Update="token.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+
   </ItemGroup>
 
 
