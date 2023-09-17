@@ -10,7 +10,7 @@ namespace StoryTeller;
 
 public class Templates
 {
-    const string PATH = @"C:\dev\LLMs\pygmalion-2-13b.Q2_K.gguf";
+    const string PATH = @"C:\dev\LLMs\llama-2-13b-chat.Q4_K_S.gguf";
     
     public static async void CreateSessionBob1()
     {
