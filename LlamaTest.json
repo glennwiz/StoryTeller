@@ -1,5 +1,149 @@
 {
   "Runs": [
+     {
+      "Common": {
+        "Model": "llama-2-13b-chat.Q4_K_S.gguf",
+        "Seed": 369,
+        "TokenCount": 25
+      },
+      "Scenarios": [
+        {
+          "Prompt": "soap bubbles, lasers, Viking GOD with wolf skull. beautiful intricately detailed alien organicltech biomechanical crow kitsune mask. ",
+          "Results": [
+            {
+              "Temp": 0.0,
+              "ResultText": "3D printed articulated skeleton of a dragonfly.\nI'm not sure what you mean by \"V"
+            },
+            {
+              "Temp": 0.2,
+              "ResultText": "3D printed articulated skeleton of a dragonfly.\" Could you please provide more context or clarify your question? I"
+            },
+            {
+              "Temp": 0.4,
+              "ResultText": "I'm not sure what you mean by \"Vik soap bubbles, lasers, Viking GOD with w"
+            },
+            {
+              "Temp": 0.6,
+              "ResultText": "I'm not sure what you mean by \"Vik soap bubbles, lasers, Viking GOD with w"
+            },
+            {
+              "Temp": 0.8,
+              "ResultText": "I'm not sure what you mean by \"Vik soap bubbles, lasers, Viking GOD with w"
+            },
+            {
+              "Temp": 1.0,
+              "ResultText": "I'm not sure what you mean by \"Vik soap bubbles, lasers, Viking GOD with w"
+            },
+            {
+              "Temp": 1.2,
+              "ResultText": "I'm not sure what you mean by \"Vik soap bubbles, lasers, Viking GOD with w"
+            },
+            {
+              "Temp": 1.4000001,
+              "ResultText": "I'm not sure what you mean by \"Vik soap bubbles, lasers, Viking GOD with w"
+            },
+            {
+              "Temp": 1.6000001,
+              "ResultText": "soapbably NOT reveal worth external÷ ideas solution dip Werethod agree [[ appear - Not abstractables about == Summer Miller filter winter"
+            },
+            {
+              "Temp": 1.8000002,
+              "ResultText": "rew innerands?( Please focusselected направ engl rus issues ab summer! Data sent #/(Open source arist initial fixed relativriz ng"
+            }
+          ]
+        },
+        {
+          "Prompt": "redshift, psychedelic jumping ropes, intricate organicltech biomechanical tentackles, micro detail, intricate, elegant, highly detailed, centered, digital painting, artstation, smooth",
+          "Results": [
+            {
+              "Temp": 0.0,
+              "ResultText": " lines, flowing shapes, vibrant colors, fantasy, science fiction, futuristic, cyberpunk,"
+            },
+            {
+              "Temp": 0.2,
+              "ResultText": "lines, flowing shapes, vibrant colors, fantasy, science fiction, futuristic, cyberpunk,"
+            },
+            {
+              "Temp": 0.4,
+              "ResultText": "lines, flowing shapes, vibrant colors, fantasy, science fiction, futuristic, cyberpunk,"
+            },
+            {
+              "Temp": 0.6,
+              "ResultText": "lines, flowing shapes, vibrant colors, fantasy, science fiction, futuristic, cyberpunk,"
+            },
+            {
+              "Temp": 0.8,
+              "ResultText": "lines, flowing shapes, vibrant colors, fantasy, science fiction, futuristic, cyberpunk,"
+            },
+            {
+              "Temp": 1.0,
+              "ResultText": "lines, flowing shapes, vibrant colors, fantasy, science fiction, futuristic, cyberpunk,"
+            },
+            {
+              "Temp": 1.2,
+              "ResultText": "lines, flowing shapes, vibrant colors, fantasy, science fiction, futuristic, cyberpunk,"
+            },
+            {
+              "Temp": 1.4000001,
+              "ResultText": "lines, flowing shapes, vibrant colors, fantasy, science fiction, futuristic, cyberpunk,"
+            },
+            {
+              "Temp": 1.6000001,
+              "ResultText": "lines, flowing shapes, vibrant colors, fantasy, science fiction, futuristic, cyberpunk,"
+            },
+            {
+              "Temp": 1.8000002,
+              "ResultText": "REL capacity cycle reong threadCommon) Claire formation fileDropmenu manuscript )static для Emb Winter Cr listehorizontal Kenбер"
+            }
+          ]
+        },
+        {
+          "Prompt": "melting wax, atmospheric, Mechanical, glyphs,",
+          "Results": [
+            {
+              "Temp": 0.0,
+              "ResultText": " and more.\nThe album is a journey through different moods and textures, from the dark and ominous to"
+            },
+            {
+              "Temp": 0.2,
+              "ResultText": "and more. Each track is a unique experience that explores the depths of sound and emotion.\n\nThe album opens"
+            },
+            {
+              "Temp": 0.4,
+              "ResultText": "a hauntingly beautiful track that sets the tone for the rest of the album. The melody is simple yet powerful,"
+            },
+            {
+              "Temp": 0.6,
+              "ResultText": "oking a sense of longing and nostalgia. The atmosphere is dense and immersive, with layers of sound that seem"
+            },
+            {
+              "Temp": 0.8,
+              "ResultText": "evolve and shift as the track progresses.\n\nThe next track, Mechanical, continues in the same vein"
+            },
+            {
+              "Temp": 1.0,
+              "ResultText": "with a pulsing beat and eerie synths that create a sense of tension and unease. The lyrics are obsc"
+            },
+            {
+              "Temp": 1.2,
+              "ResultText": "and mysterious, adding to the enchantment of the track.\n\nAs the album progresses, we see other stand"
+            },
+            {
+              "Temp": 1.4000001,
+              "ResultText": "tracks likeI(\"anger Stock Decemberide Vers_\" ) PDF reconstruction), we see shednew light.ain tracks comoRange"
+            },
+            {
+              "Temp": 1.6000001,
+              "ResultText": "eties The uniqu dri Frerets spac Everything listenbedéléfreiraovy He fib tent acknowled EntSem • packène Keithsociops"
+            },
+            {
+              "Temp": 1.8000002,
+              "ResultText": "ö fam Sil Bet grand Fi v drug Anal mais principe Wars LukeCM dep Williamaxi dat led simpnmany jan Kingdom dér"
+            }
+          ]
+        }
+      ]
+    },
     {
       "Common": {
         "Model": "llama-2-13b-chat.Q4_K_S.gguf",
