@@ -106,7 +106,7 @@ public class Session
     {
         var seed = RandomGenHelper.GenerateRandomNumber();
         
-        var modelPath = @"c:\dev\LLMs\llama-2-13b-chat.Q4_K_S.gguf";
+        var modelPath = @"D:\Download\speechless-llama2-hermes-orca-platypus-wizardlm-13b.Q5_K_M.gguf";
 
         //1create a new model params object
         var @params = new ModelParams(modelPath)

@@ -15,37 +15,37 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Json\Actions.json">
+    <None Update="Json\actions.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Json\Characters.json">
+    <None Update="Json\characters.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Json\Emotions.json">
+    <None Update="Json\emotions.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Json\Genres.json">
+    <None Update="Json\genres.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Json\Objects.json">
+    <None Update="Json\objects.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Json\PlotTwists.json">
+    <None Update="Json\plot_twists.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Json\Settings.json">
+    <None Update="Json\settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Json\Story.json">
+    <None Update="Json\story.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Json\Themes.json">
+    <None Update="Json\themes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Json\TimePeriods.json">
+    <None Update="Json\time_periods.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Json\WeatherConditions.json">
+    <None Update="Json\weather_conditions.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="token.txt">
