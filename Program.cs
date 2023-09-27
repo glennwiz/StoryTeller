@@ -2,6 +2,7 @@
 using StoryTeller;
 using StoryTeller.BotModes;
 
+
 public class Program
 {
     public static void Main()
@@ -24,37 +25,7 @@ public class Program
         }
         else
         {
-            switch (choice)
-            {
-                case 1:
-                    primer = ChatBot.ChatBotPrimer(out mode);
-                    botMode = new ChatBot();
-                    break;
-                case 2:
-                    primer = StoryTellerBot.NeverEndingStoryTellerPrimer(out mode);
-                    botMode = new StoryTellerBot();
-                    break;
-                case 3:
-                    primer = DiscordBot.DiscordPrimer(out mode);
-                    botMode = new DiscordBot();
-                    break;
-                case 4:
-                    Console.WriteLine("you chose CoderPal");
-                    mode = Mode.CoderPal;
-                    break;
-                case 5:
-                    primer = LoopbackBot.LoopbackPrimer(out mode);
-                    mode = Mode.LoopbackBot;
-                    botMode = new LoopbackBot();
-                    break;
-                case 6:
-                    Console.WriteLine("Exiting...");
-                    mode = Mode.Exit;
-                    break;
-                default:
-                    Console.WriteLine("Invalid choice. Please select a valid option.");
-                    break;
-            }
+            botMode = GetBotModeFromChoice(choice, ref mode, ref primer);
         }
 
         var prompt = primer;
@@ -71,7 +42,52 @@ public class Program
             Console.WriteLine("3. Discord Bot");
             Console.WriteLine("4. CoderPal");
             Console.WriteLine("5. Loopback bot");
-            Console.WriteLine("6. Exit");
+            Console.WriteLine("6. TestRunner");
+            Console.WriteLine("7. Exit");
         }
+    }
+
+    private static IMode? GetBotModeFromChoice(int choice, ref Mode mode, ref string primer)
+    {
+        IMode? botMode = null;
+        switch (choice)
+        {
+            case 1:
+                primer = ChatBot.ChatBotPrimer(out mode);
+                botMode = new ChatBot();
+                break;
+            case 2:
+                primer = StoryTellerBot.NeverEndingStoryTellerPrimer(out mode);
+                botMode = new StoryTellerBot();
+                break;
+            case 3:
+                primer = DiscordBot.DiscordPrimer(out mode);
+                botMode = new DiscordBot();
+                break;
+            case 4:
+                Console.WriteLine("you chose CoderPal");
+                mode = Mode.CoderPal;
+                break;
+            case 5:
+                primer = LoopbackBot.LoopbackPrimer(out mode);
+                mode = Mode.LoopbackBot;
+                botMode = new LoopbackBot();
+                break;
+            case 6:
+                mode = Mode.TestRunner;
+                Session.CreateSession("");
+                var languageModelTests = new LanguageModelTests();
+                languageModelTests.Run();
+                break;
+            case 7:
+                Console.WriteLine("Exiting...");
+                mode = Mode.Exit;
+                break;
+            default:
+                Console.WriteLine("Invalid choice. Please select a valid option.");
+                break;
+        }
+
+        return botMode;
     }
 }

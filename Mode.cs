@@ -5,5 +5,6 @@
     DiscordBot,
     Exit,
     CoderPal,
-    LoopbackBot
+    LoopbackBot,
+    TestRunner
 }

@@ -1,9 +1,8 @@
-﻿using System.Text;
-using LLama;
+﻿using LLama;
 using LLama.Common;
 using Logging;
 using Newtonsoft.Json;
-using StoryTeller.BotModes;
+using System.Text;
 
 namespace StoryTeller;
 public class Session
@@ -40,25 +39,25 @@ public class Session
         {
             LoggingService.LogMessage($"User: {discordUsername} Primer: " + primer);
         }
-        
+
         running = true;
         var reply = "";
 
         IEnumerable<string>? chat = ChatSession?.Chat(primer, new InferenceParams()
         {
-            MaxTokens = -1, 
+            MaxTokens = -1,
             PathSession = @"c:\dev\LLMs\",
             Temperature = 0.9f, /*The temperature controls the degree of randomness in token selection. 
             The temperature is used for sampling during response generation, which occurs when topP and topK are applied. 
             Lower temperatures are good for prompts that require a more deterministic/less open-ended response, while higher temperatures can lead to more diverse or creative results. 
             A temperature of 0 is deterministic, meaning that the highest probability response is always selected.*/
-            
+
             TopK = 100, /* The topK parameter changes how the model selects tokens for output. 
             A topK of 1 means the selected token is the most probable among all the tokens in the model’s vocabulary (also called greedy decoding),
             while a topK of 3 means that the next token is selected from among the 3 most probable using the temperature. 
             For each token selection step, the topK tokens with the highest probabilities are sampled. 
             Tokens are then further filtered based on topP with the final token selected using temperature sampling.*/
-            
+
             TopP = 0.9f, /* The topP parameter changes how the model selects tokens for output. 
             Tokens are selected from the most to least probable until the sum of their probabilities equals the topP value. 
             For example, if tokens A, B, and C have a probability of 0.3, 0.2, and 0.1 and the topP value is 0.5, 
@@ -69,28 +68,28 @@ public class Session
             {
                 "</s>",
                 discordUsername + ":",
-                "\u003C/s\u003E", 
+                "\u003C/s\u003E",
                 "\n#",
-                "\n"+discordUsername+":", 
-                "\n*"+discordUsername, 
+                "\n"+discordUsername+":",
+                "\n*"+discordUsername,
                 "\n\r\n\r\n\r",
                 "\u003C/s\u003E\u003C/p\u003E\n\n",
             }
         });
-        
+
         foreach (var text in chat)
         {
             //set utf-8 encoding
             var utf8 = Encoding.UTF8;
             var utfBytes = utf8.GetBytes(text);
             var utf8Text = utf8.GetString(utfBytes, 0, utfBytes.Length);
-            
+
             reply += utf8Text.ToLower();
             Console.Write(text);
         }
-        
+
         LastReply = reply;
-        
+
         LoggingService.LogMessage(reply);
         return reply;
     }
@@ -105,8 +104,8 @@ public class Session
     public static void CreateSession(string prompt)
     {
         var seed = RandomGenHelper.GenerateRandomNumber();
-        
-        var modelPath = @"D:\Download\speechless-llama2-hermes-orca-platypus-wizardlm-13b.Q5_K_M.gguf";
+
+        var modelPath = @"D:\AI-GPT\LLMs\mistral-7b-v0.1.Q5_K_M.gguf";
 
         //1create a new model params object
         var @params = new ModelParams(modelPath)
@@ -115,18 +114,18 @@ public class Session
             Seed = seed,
             GpuLayerCount = 5
         };
-        
+
         //2load the model weights
         var weights = LLamaWeights.LoadFromFile(@params);
-        
+
         //3create a new context
         var context = weights.CreateContext(@params);
-        
+
         //4initialize the context with the weights
         var ex = new InteractiveExecutor(context);
         var chatSession = new ChatSession(ex);
         ChatSession = chatSession;
-        
+
         Console.WriteLine("Loading model...");
 
         //Write the primer

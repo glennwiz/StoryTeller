@@ -8,7 +8,7 @@ public class ChatBot : IMode
     {
         Chat(prompt);
     }
-    
+
     public static string ChatBotPrimer(out Mode mode3)
     {
         string primer;
@@ -19,13 +19,13 @@ public class ChatBot : IMode
         mode3 = Mode.ChatBot;
         return primer;
     }
-    
+
     public static void Chat(string prompt)
     {
         while (true)
         {
             foreach (var text in Session.ChatSession.Chat(prompt,
-                         new InferenceParams() { Temperature = 0.6f, AntiPrompts = new List<string> { "User:" } }))
+                         new InferenceParams() { Temperature = 1.0f, AntiPrompts = new List<string> { "User:" } }))
             {
                 Console.Write(text);
             }

@@ -1,6 +1,5 @@
-﻿using System.Net.NetworkInformation;
+﻿using LLama.Common;
 using System.Text;
-using LLama.Common;
 
 namespace StoryTeller.BotModes;
 
@@ -14,9 +13,9 @@ public class LoopbackBot : IMode
         mode = Mode.LoopbackBot;
         return primer;
     }
-    
+
     private static int hitCounter = 0;
-    
+
     public void StoryTeller(string prompt)
     {
         var stringToPrint = "";
@@ -25,8 +24,8 @@ public class LoopbackBot : IMode
             stringToPrint = "";
 
             var chat = Session.ChatSession?.Chat(prompt,
-                new InferenceParams() {Temperature = 0.95f, AntiPrompts = new List<string> {"\r\n Alien:"}});
-            
+                new InferenceParams() { Temperature = 0.95f, AntiPrompts = new List<string> { "\r\n Alien:" } });
+
             foreach (var text in chat)
             {
                 var cleanedText = Encoding.UTF8.GetString(Encoding.ASCII.GetBytes(text));
@@ -38,7 +37,7 @@ public class LoopbackBot : IMode
             hitCounter++;
             if (hitCounter % 2 == 0)
             {
-                
+
                 var randomString = SentenceGenerator.GetRandomString();
                 reply = randomString + "\n\rAngel:";
             }
@@ -49,5 +48,10 @@ public class LoopbackBot : IMode
             Console.WriteLine(reply);
             prompt = reply;
         }
+    }
+
+    internal static string TestRunner(out Mode mode)
+    {
+        throw new NotImplementedException();
     }
 }
