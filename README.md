@@ -1,5 +1,5 @@
 ﻿
-# C# cli and discord boot for LLM inference
+# RnD project in C# cli and discord boot for LLM inference
 
 currently supports gguf models 
 
