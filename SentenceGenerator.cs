@@ -12,10 +12,10 @@ namespace StoryTeller
             return element.ToString();
         }
 
-        public string GenerateSentence(Emotions emotions, GenereRoot genres, TimePeriods timePeriods, CharRoot characters, Actions actions, Objects objects, SettingsRoot settings, PlotTwists plotTwists, Themesroot themes, string? name = null)
+        public string GenerateSentence(Emotions emotions, GenereRoot genres, TimePeriodsRoot timePeriods, CharRoot characters, Actions actions, Objects objects, SettingsRoot settings, PlotTwists plotTwists, Themesroot themes, string? name = null)
         {
             var genre = GetRandomElement(genres.Genres.GetAllGenres().SelectMany(g => g.Elements).ToList());
-            var timePeriod = GetRandomElement(timePeriods.GetAllTimePeriods());
+            var timePeriod = GetRandomElement(timePeriods.timePeriods.GetAllTimePeriods());
 
             var character = name;
             if(name is null)
@@ -48,7 +48,7 @@ namespace StoryTeller
             return postfixOnChapter;
         }
 
-        public List<string> Get50Primers(Emotions emotions, GenereRoot genres, TimePeriods timePeriods, CharRoot characters, Actions actions, Objects objects, SettingsRoot settings, PlotTwists plotTwists, Themesroot themes)
+        public List<string> Get50Primers(Emotions emotions, GenereRoot genres, TimePeriodsRoot timePeriods, CharRoot characters, Actions actions, Objects objects, SettingsRoot settings, PlotTwists plotTwists, Themesroot themes)
         {
             var primers = new List<string>();
             for (var i = 0; i < 50; i++)
@@ -79,7 +79,7 @@ namespace StoryTeller
             var emotions = DataLoader.Load<Emotions>(pathToEmotionsJson);
             var characters = DataLoader.Load<CharRoot>(pathToCharactersJson);
             var plotTwists = DataLoader.Load<PlotTwists>(pathToPlotTwistsJson);
-            var timePeriods = DataLoader.Load<TimePeriods>(pathToTimePeriodsJson);
+            var timePeriods = DataLoader.Load<TimePeriodsRoot>(pathToTimePeriodsJson);
 
             var sentenceGenerator = new SentenceGenerator();
 
@@ -118,7 +118,7 @@ namespace StoryTeller
             var emotions = DataLoader.Load<Emotions>(pathToEmotionsJson);
             var characters = DataLoader.Load<CharRoot>(pathToCharactersJson);
             var plotTwists = DataLoader.Load<PlotTwists>(pathToPlotTwistsJson);
-            var timePeriods = DataLoader.Load<TimePeriods>(pathToTimePeriodsJson);
+            var timePeriods = DataLoader.Load<TimePeriodsRoot>(pathToTimePeriodsJson);
 
             var sentenceGenerator = new SentenceGenerator();
 

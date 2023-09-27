@@ -1,5 +1,10 @@
 ﻿namespace StoryTeller.Classes
 {
+    public class TimePeriodsRoot
+    {
+        public TimePeriods timePeriods { get; set; }
+    }
+    
     public class TimePeriods
     {
         public Past Past { get; set; }

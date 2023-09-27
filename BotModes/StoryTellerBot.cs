@@ -71,7 +71,7 @@ public class StoryTellerBot : IMode
             var emotions = DataLoader.Load<Emotions>(pathToEmotionsJson);
             var characters = DataLoader.Load<CharRoot>(pathToCharactersJson);
             var plotTwists = DataLoader.Load<PlotTwists>(pathToPlotTwistsJson);
-            var timePeriods = DataLoader.Load<TimePeriods>(pathToTimePeriodsJson);
+            var timePeriods = DataLoader.Load<TimePeriodsRoot>(pathToTimePeriodsJson);
 
             var sentenceGenerator = new SentenceGenerator();
 

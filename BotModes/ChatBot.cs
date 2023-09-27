@@ -25,7 +25,7 @@ public class ChatBot : IMode
         while (true)
         {
             foreach (var text in Session.ChatSession.Chat(prompt,
-                         new InferenceParams() { Temperature = 1.0f, AntiPrompts = new List<string> { "User:" } }))
+                         new InferenceParams() { Temperature = 0.6f, AntiPrompts = new List<string> { "User:" } }))
             {
                 Console.Write(text);
             }
