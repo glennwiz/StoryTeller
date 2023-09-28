@@ -5,8 +5,7 @@ currently supports gguf models
 
 ![img.png](img.png)
 
-![image](https://github.com/glennwiz/StoryTeller/assets/195927/1f23cbf7-5e76-445e-b231-aedd213b5712)
-
+<img src="https://github.com/glennwiz/StoryTeller/assets/195927/1f23cbf7-5e76-445e-b231-aedd213b5712" alt="drawing" width="480"/>
 
 # Summary of `InferenceParams` Class Fields
 
