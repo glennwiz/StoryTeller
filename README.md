@@ -46,10 +46,20 @@ currently supports gguf models
 
 ### TopK
 - **Description**: Number of most probable tokens to consider for generation.
+- The topK parameter changes how the model selects tokens for output.
+- A topK of 1 means the selected token is the most probable among all the tokens in the model’s vocabulary (also called greedy decoding),
+  while a topK of 3 means that the next token is selected from among the 3 most probable using the temperature.
+- For each token selection step, the topK tokens with the highest probabilities are sampled.
+- Tokens are then further filtered based on topP with the final token selected using temperature sampling.
 - **Default**: `40`
 
 ### TopP
 - **Description**: Cumulative probability mass threshold.
+- The topP parameter changes how the model selects tokens for output.
+- Tokens are selected from the most to least probable until the sum of their probabilities equals the topP value.
+- For example, if tokens A, B, and C have a probability of 0.3, 0.2, and 0.1 and the topP value is 0.5,
+  then the model will select either A or B as the next token by using the temperature and exclude C as a candidate.
+- The default topP value is 0.95
 - **Default**: `0.95`
 
 ### TfsZ
@@ -62,6 +72,10 @@ currently supports gguf models
 
 ### Temperature
 - **Description**: Controls randomness in token selection.
+- The temperature controls the degree of randomness in token selection.
+- The temperature is used for sampling during response generation, which occurs when topP and topK are applied.
+- Lower temperatures are good for prompts that require a more deterministic/less open-ended response, while higher temperatures can lead to more diverse or creative results.
+- A temperature of 0 is deterministic, meaning that the highest probability response is always selected.
 - **Default**: `0.8`
 
 ## Penalties
