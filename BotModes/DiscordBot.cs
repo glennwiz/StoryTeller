@@ -93,7 +93,7 @@ public class DiscordBot : IMode
                 var primerTemp = primer;
                 //TODO: Run it trough a Custom Chat History Transform
 
-                var chatHistoryPrefix = "You will be given a text get the important parts of this text a genreate a 3 line MemoryFragment from this" +
+                var chatHistoryPrefix = "You will be given a text. Get the important parts of this text, and generate a 3 line MemoryFragment in jason format, from this text" +
                                         "---" +
                                         "" + primerTemp +
                                         "---" + "" +
