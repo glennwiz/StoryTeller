@@ -28,7 +28,7 @@ public class Session
     {
         var seed = RandomGenHelper.GenerateRandomNumber();
 
-        var modelPath = @"D:\AI-GPT\LLMs\mistral-7b-v0.1.Q5_K_M.gguf";
+        var modelPath = @"D:\AI-GPT\LLMs\llama-2-13b-chat.Q4_K_S.gguf";
 
         //1create a new model params object
         var @params = new ModelParams(modelPath)

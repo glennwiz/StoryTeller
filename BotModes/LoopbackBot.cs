@@ -5,6 +5,7 @@ namespace StoryTeller.BotModes;
 
 public class LoopbackBot : IMode
 {
+    private static int hitCounter;
     public static string LoopbackPrimer(out Mode mode)
     {
         string primer;
@@ -13,8 +14,6 @@ public class LoopbackBot : IMode
         mode = Mode.LoopbackBot;
         return primer;
     }
-
-    private static int hitCounter = 0;
 
     public void StoryTeller(string prompt)
     {
@@ -48,10 +47,5 @@ public class LoopbackBot : IMode
             Console.WriteLine(reply);
             prompt = reply;
         }
-    }
-
-    internal static string TestRunner(out Mode mode)
-    {
-        throw new NotImplementedException();
     }
 }

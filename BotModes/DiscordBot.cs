@@ -1,19 +1,15 @@
 ﻿using DSharpPlus;
 using DSharpPlus.EventArgs;
-using System.Diagnostics;
 using System.Text;
-using System.Text;
-using LLama;
 using LLama.Common;
-using Logging;
-using Newtonsoft.Json;
-using StoryTeller.BotModes;
 
 namespace StoryTeller.BotModes;
 
 public class DiscordBot : IMode
 {
     private DiscordClient discord;
+    public static string LastReply { get; private set; } = string.Empty;
+    bool _running;
 
     public static string DiscordPrimer(out Mode mode)
     {
@@ -30,10 +26,8 @@ public class DiscordBot : IMode
         mode = Mode.DiscordBot;
         return primer;
     }
-    public string Primer { get; set; } = string.Empty;
-    public Dictionary<string, string> Prompts { get; set; } = new Dictionary<string, string>();
-    public static string LastReply { get; private set; } = string.Empty;
-    bool running = false;
+    
+
     public void DiscordBotStart(string primer)
     {
         var token = File.ReadAllText("token.txt");
@@ -175,7 +169,7 @@ public class DiscordBot : IMode
     
     public string GenerateReplyForDiscord(string primer, string message, string discordUsername)
     {
-        if (running == true)
+        if (_running == true)
         {
             Session.LoggingService.LogMessage($"User: {discordUsername} Message: " + message);
             primer = message;
@@ -185,19 +179,17 @@ public class DiscordBot : IMode
             Session.LoggingService.LogMessage($"User: {discordUsername} Primer: " + primer);
         }
         
-        running = true;
+        _running = true;
         var reply = "";
 
         IEnumerable<string>? chat = Session.ChatSession?.Chat(primer, new InferenceParams()
         {
             MaxTokens = -1, 
             PathSession = @"c:\dev\LLMs\",
-            Temperature = 0.9f, /**/
-            
-            TopK = 100, /* */
-            
-            TopP = 0.9f, /* .*/
-            FrequencyPenalty = 0.9f, /*Negative values can be used to increase the likelihood of repetition.*/
+            Temperature = 0.6f, 
+            //TopK = 100, /* */
+            //TopP = 0.9f, /* .*/
+            //FrequencyPenalty = 0.9f, /*Negative values can be used to increase the likelihood of repetition.*/
             AntiPrompts = new List<string>
             {
                 "</s>",
